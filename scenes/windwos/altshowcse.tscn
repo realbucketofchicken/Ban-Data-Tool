@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://bv4mvou68l2sk"]
+
+[ext_resource type="Script" uid="uid://2f384phq5272" path="res://AltShowcase.gd" id="1_7tuyd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7tuyd"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_45q1g"]
+font_size = 15
+font_color = Color(0.74558026, 0.7455802, 0.7455802, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_y1bem"]
+font_size = 27
+
+[node name="Altshowcase" type="Control" unique_id=96967418 node_paths=PackedStringArray("name_label", "uid_label", "count_label", "search_alts_button")]
+custom_minimum_size = Vector2(0, 58.235)
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+script = ExtResource("1_7tuyd")
+name_label = NodePath("HBoxContainer/VBoxContainer/Name")
+uid_label = NodePath("HBoxContainer/VBoxContainer/Uid")
+count_label = NodePath("HBoxContainer/Count")
+search_alts_button = NodePath("HBoxContainer/SearchAltsButton")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2074909687]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.13333334)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=809192798]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=166743843]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=1070838197]
+layout_mode = 2
+text = "name"
+label_settings = SubResource("LabelSettings_7tuyd")
+
+[node name="Uid" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=718203878]
+layout_mode = 2
+text = "UID"
+label_settings = SubResource("LabelSettings_45q1g")
+
+[node name="Count" type="Label" parent="HBoxContainer" unique_id=899914138]
+layout_mode = 2
+text = "67 alts"
+label_settings = SubResource("LabelSettings_y1bem")
+
+[node name="SearchAltsButton" type="Button" parent="HBoxContainer" unique_id=957758160]
+layout_mode = 2
+text = "Show"

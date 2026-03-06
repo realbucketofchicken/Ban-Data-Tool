@@ -1,0 +1,143 @@
+[gd_scene format=3 uid="uid://dy18m2uq557to"]
+
+[ext_resource type="Script" uid="uid://n41mlonj47n3" path="res://scenes/windwos/edit_window.gd" id="1_827p1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_827p1"]
+font_size = 14
+font_color = Color(0.7581918, 0.7581918, 0.7581917, 1)
+
+[node name="EditWindow" type="Window" unique_id=1215629639]
+oversampling_override = 1.0
+initial_position = 4
+size = Vector2i(680, 395)
+visible = false
+force_native = true
+script = ExtResource("1_827p1")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=207830370]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32941177, 0.25490198, 0.1764706, 1)
+
+[node name="margin" type="MarginContainer" parent="." unique_id=81777967]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="margin" unique_id=565613909]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="margin/VBoxContainer" unique_id=725988158]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Edit Punishment"
+
+[node name="HSeparator" type="HSeparator" parent="margin/VBoxContainer" unique_id=155976402]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="margin/VBoxContainer" unique_id=7819980]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Container" type="VBoxContainer" parent="margin/VBoxContainer/ScrollContainer" unique_id=505332829]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Name" type="HBoxContainer" parent="margin/VBoxContainer/ScrollContainer/Container" unique_id=2031494707]
+layout_mode = 2
+
+[node name="Name Label" type="Label" parent="margin/VBoxContainer/ScrollContainer/Container/Name" unique_id=579407327]
+layout_mode = 2
+text = "Name:"
+
+[node name="Name Edit" type="LineEdit" parent="margin/VBoxContainer/ScrollContainer/Container/Name" unique_id=716298584]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UID" type="HBoxContainer" parent="margin/VBoxContainer/ScrollContainer/Container" unique_id=211366043]
+layout_mode = 2
+
+[node name="UID Label" type="Label" parent="margin/VBoxContainer/ScrollContainer/Container/UID" unique_id=1644730935]
+layout_mode = 2
+text = "UID:"
+
+[node name="UID Edit" type="LineEdit" parent="margin/VBoxContainer/ScrollContainer/Container/UID" unique_id=946656979]
+layout_mode = 2
+size_flags_horizontal = 3
+draw_control_chars = true
+
+[node name="Type" type="HBoxContainer" parent="margin/VBoxContainer/ScrollContainer/Container" unique_id=301450437]
+layout_mode = 2
+
+[node name="Type" type="Label" parent="margin/VBoxContainer/ScrollContainer/Container/Type" unique_id=10941001]
+layout_mode = 2
+text = "Type:"
+
+[node name="TypeButton" type="OptionButton" parent="margin/VBoxContainer/ScrollContainer/Container/Type" unique_id=2091379963]
+layout_mode = 2
+
+[node name="Reason" type="HBoxContainer" parent="margin/VBoxContainer/ScrollContainer/Container" unique_id=420802158]
+layout_mode = 2
+
+[node name="Reason Label" type="Label" parent="margin/VBoxContainer/ScrollContainer/Container/Reason" unique_id=675845905]
+layout_mode = 2
+text = "Reason:"
+
+[node name="Reason Edit" type="LineEdit" parent="margin/VBoxContainer/ScrollContainer/Container/Reason" unique_id=194738986]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Ends" type="HBoxContainer" parent="margin/VBoxContainer/ScrollContainer/Container" unique_id=594016585]
+layout_mode = 2
+
+[node name="Ends Label" type="Label" parent="margin/VBoxContainer/ScrollContainer/Container/Ends" unique_id=1648518427]
+layout_mode = 2
+text = "Ends on:"
+
+[node name="DaysEdit" type="SpinBox" parent="margin/VBoxContainer/ScrollContainer/Container/Ends" unique_id=1346908939]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 364.0
+prefix = "day "
+
+[node name="YearsEdit" type="SpinBox" parent="margin/VBoxContainer/ScrollContainer/Container/Ends" unique_id=467960707]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1970.0
+max_value = 1000000.0
+value = 1970.0
+allow_greater = true
+prefix = "year"
+
+[node name="Label2" type="Label" parent="margin/VBoxContainer/ScrollContainer/Container" unique_id=9299148]
+layout_mode = 2
+text = "keep all at 0 for an infinite ban."
+label_settings = SubResource("LabelSettings_827p1")
+
+[node name="DeleteCheck" type="CheckBox" parent="margin/VBoxContainer/ScrollContainer/Container" unique_id=1640369628]
+layout_mode = 2
+text = "Do you want to delete this punishment?"
+
+[node name="DeleteButton" type="Button" parent="margin/VBoxContainer/ScrollContainer/Container" unique_id=150626956]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Delete"
+alignment = 0
+
+[node name="Done" type="Button" parent="margin/VBoxContainer" unique_id=1829409858]
+layout_mode = 2
+text = "Done"

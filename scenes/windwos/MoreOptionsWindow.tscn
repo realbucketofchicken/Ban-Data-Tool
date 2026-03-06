@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://burukk5374yyu"]
+
+[ext_resource type="Script" uid="uid://cgr5yq35l0u65" path="res://scenes/windwos/more_options_window.gd" id="1_5xt3b"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5xt3b"]
+font_size = 30
+
+[node name="OptionsWindow" type="Window" unique_id=1485451151 node_paths=PackedStringArray("dupe_clear_button", "save_v_1_button")]
+oversampling_override = 1.0
+position = Vector2i(0, 36)
+size = Vector2i(300, 200)
+visible = false
+force_native = true
+min_size = Vector2i(262, 199)
+script = ExtResource("1_5xt3b")
+dupe_clear_button = NodePath("MarginContainer/ScrollContainer/BoxContainer/DupeClearButton")
+save_v_1_button = NodePath("MarginContainer/ScrollContainer/BoxContainer/SaveV1Button")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1724009282]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.32941177, 0.25490198, 0.1764706, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=782458598]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer" unique_id=1444604018]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="BoxContainer" type="BoxContainer" parent="MarginContainer/ScrollContainer" unique_id=1819150398]
+layout_mode = 2
+size_flags_horizontal = 3
+vertical = true
+
+[node name="RichTextLabel" type="Label" parent="MarginContainer/ScrollContainer/BoxContainer" unique_id=66906023]
+layout_mode = 2
+text = "Utility"
+label_settings = SubResource("LabelSettings_5xt3b")
+
+[node name="DupeClearButton" type="Button" parent="MarginContainer/ScrollContainer/BoxContainer" unique_id=25275652]
+layout_mode = 2
+tooltip_text = "Removes duplicate entires(same uid and name)"
+text = "Clear Dupes"
+
+[node name="SaveV1Button" type="Button" parent="MarginContainer/ScrollContainer/BoxContainer" unique_id=1718864258]
+layout_mode = 2
+tooltip_text = "Save a version of the banlist in the legacy format"
+text = "save duplicate v1 file"

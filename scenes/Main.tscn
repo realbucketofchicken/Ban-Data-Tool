@@ -1,0 +1,244 @@
+[gd_scene format=3 uid="uid://cxf3yenlgvupj"]
+
+[ext_resource type="Script" uid="uid://c57yqopmolu8o" path="res://main.gd" id="1_bjd11"]
+[ext_resource type="PackedScene" uid="uid://bxpr2nb1hydpi" path="res://scenes/punish_showcase.tscn" id="2_qmy6f"]
+[ext_resource type="Texture2D" uid="uid://o2sjogt3b0ht" path="res://tf2logo.png" id="3_mwfav"]
+[ext_resource type="Texture2D" uid="uid://dppihj7ptidog" path="res://Plus.png" id="4_3p2gp"]
+[ext_resource type="Texture2D" uid="uid://c7r26dxgqkklc" path="res://Minus.png" id="5_cvmbd"]
+[ext_resource type="Script" uid="uid://c5ihhdkosauvw" path="res://punish_list_parser.gd" id="6_ft6cd"]
+[ext_resource type="Script" uid="uid://caaljvxo8tja5" path="res://ban_list_exporter.gd" id="7_bb450"]
+[ext_resource type="PackedScene" uid="uid://dy18m2uq557to" path="res://scenes/windwos/edit_window.tscn" id="8_nfivy"]
+[ext_resource type="PackedScene" uid="uid://burukk5374yyu" path="res://scenes/windwos/MoreOptionsWindow.tscn" id="9_1nqs0"]
+[ext_resource type="PackedScene" uid="uid://gah2g6nabyf4" path="res://scenes/windwos/statistics.tscn" id="10_1iba3"]
+[ext_resource type="Script" uid="uid://bt5wd8qjaevk0" path="res://search.gd" id="11_yxlcp"]
+[ext_resource type="Script" uid="uid://3gmapu83dglo" path="res://save_file_parser.gd" id="12_ebg2g"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_lgr22"]
+font_size = 26
+outline_size = 11
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 11
+shadow_color = Color(0, 0, 0, 0.3254902)
+shadow_offset = Vector2(12.105, 8.315)
+stacked_outline_count = 3
+stacked_outline_0/size = 4
+stacked_outline_0/color = Color(1, 0, 0, 1)
+stacked_outline_1/size = 4
+stacked_outline_1/color = Color(0.8099345, 0.9946762, 7.70092e-07, 1)
+stacked_outline_2/size = 4
+stacked_outline_2/color = Color(0.32855865, 0.41260794, 1, 1)
+
+[node name="Control" type="Control" unique_id=2276929 node_paths=PackedStringArray("edit_window", "punish_list_parser", "PunishContainer", "new_punish_btn", "file_opener", "open_btn", "new_btn", "save_btn", "exporter", "file_label", "save_file_parser", "quit_confirmation", "ban_counter", "save_label", "plus", "minus", "more_btn", "options_window")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bjd11")
+edit_window = NodePath("EditWindow")
+punish_list_parser = NodePath("BanListParser")
+PunishContainer = NodePath("MarginContainer/VBoxContainer/ScrollContainer/Tree")
+punish_scene = ExtResource("2_qmy6f")
+new_punish_btn = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Punish")
+file_opener = NodePath("OpenFile")
+open_btn = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/OpenFileBtn")
+new_btn = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Punish")
+save_btn = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/SaveBtn")
+exporter = NodePath("BanListExporter")
+file_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/CurrentFile")
+save_file_parser = NodePath("SaveFileParser")
+quit_confirmation = NodePath("ConfirmationDialog")
+ban_counter = NodePath("MarginContainer/VBoxContainer/HBoxContainer/BanCounter")
+save_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/SaveLabel")
+plus = NodePath("MarginContainer/VBoxContainer/HBoxContainer/BanCounter/Plus")
+minus = NodePath("MarginContainer/VBoxContainer/HBoxContainer/BanCounter/Minus")
+more_btn = NodePath("MarginContainer/VBoxContainer/HBoxContainer/More")
+options_window = NodePath("OptionsWindow")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1516457942]
+modulate = Color(0.74558026, 0.7455802, 0.7455802, 1)
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+offset_left = -119.0
+offset_top = -214.0
+offset_right = 405.0
+offset_bottom = 526.0
+texture = ExtResource("3_mwfav")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1789999219]
+z_index = -2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32993424, 0.25434008, 0.17645565, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1863119132]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1186401858]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="FlowContainer" parent="MarginContainer/VBoxContainer" unique_id=550324332]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=388690639]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TFVR punishlist maker 2000™"
+label_settings = SubResource("LabelSettings_lgr22")
+
+[node name="BanCounter" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=589605427]
+layout_mode = 2
+text = "Unique Bans: "
+
+[node name="Plus" type="CPUParticles2D" parent="MarginContainer/VBoxContainer/HBoxContainer/BanCounter" unique_id=93983186]
+position = Vector2(76, 8)
+emitting = false
+texture = ExtResource("4_3p2gp")
+lifetime = 3.9
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 7.85
+spread = 180.0
+initial_velocity_min = 0.8
+initial_velocity_max = 74.87
+
+[node name="Minus" type="CPUParticles2D" parent="MarginContainer/VBoxContainer/HBoxContainer/BanCounter" unique_id=2092945034]
+position = Vector2(76, 8)
+emitting = false
+amount = 3
+texture = ExtResource("5_cvmbd")
+lifetime = 3.9
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 7.85
+spread = 180.0
+initial_velocity_min = 0.8
+initial_velocity_max = 74.87
+
+[node name="Punish" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=100050923]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "new punishment"
+
+[node name="Stats" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1256562107]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Stats"
+
+[node name="More" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=804757173]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "More"
+
+[node name="SearchBar" type="LineEdit" parent="MarginContainer/VBoxContainer" unique_id=2022677611]
+layout_mode = 2
+placeholder_text = "Search..."
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1970903622]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer" unique_id=1423908622]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Tree" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer" unique_id=200799914]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1677426181]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="FlowContainer" parent="MarginContainer/VBoxContainer" unique_id=1760266968]
+layout_mode = 2
+alignment = 2
+last_wrap_alignment = 2
+
+[node name="OpenFileBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1707347790]
+layout_mode = 2
+text = "Open file"
+
+[node name="CurrentFile" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1158273656]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "no file selected"
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="SaveLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1042352785]
+visible = false
+layout_mode = 2
+text = "*"
+
+[node name="SaveBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1041770707]
+layout_mode = 2
+text = "Save changes"
+
+[node name="BanListParser" type="Node" parent="." unique_id=951623750]
+script = ExtResource("6_ft6cd")
+
+[node name="BanListExporter" type="Node" parent="." unique_id=1531169139]
+script = ExtResource("7_bb450")
+
+[node name="EditWindow" parent="." unique_id=211137631 instance=ExtResource("8_nfivy")]
+
+[node name="OptionsWindow" parent="." unique_id=1485451151 instance=ExtResource("9_1nqs0")]
+initial_position = 4
+
+[node name="Statistics" parent="." unique_id=1932979201 node_paths=PackedStringArray("root", "PunishContainer", "search_bar") instance=ExtResource("10_1iba3")]
+root = NodePath("..")
+PunishContainer = NodePath("../MarginContainer/VBoxContainer/ScrollContainer/Tree")
+search_bar = NodePath("../MarginContainer/VBoxContainer/SearchBar")
+
+[node name="Search" type="Node" parent="." unique_id=170590161 node_paths=PackedStringArray("search_bar", "punish_container")]
+script = ExtResource("11_yxlcp")
+search_bar = NodePath("../MarginContainer/VBoxContainer/SearchBar")
+punish_container = NodePath("../MarginContainer/VBoxContainer/ScrollContainer/Tree")
+
+[node name="OpenFile" type="FileDialog" parent="." unique_id=1378168421]
+oversampling_override = 1.0
+title = "Open a File"
+size = Vector2i(807, 360)
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.txt", "*.dat")
+use_native_dialog = true
+
+[node name="SaveFileParser" type="Node" parent="." unique_id=930223611]
+script = ExtResource("12_ebg2g")
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="." unique_id=416398003]
+oversampling_override = 1.0
+initial_position = 4
+size = Vector2i(305, 100)
+always_on_top = true
+force_native = true
+ok_button_text = "Save and quit"
+dialog_text = "You have unsaved changes!"
+cancel_button_text = "Quit without saving"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Stats" to="Statistics" method="grab_focus"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Stats" to="Statistics" method="show"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/More" to="OptionsWindow" method="grab_focus"]

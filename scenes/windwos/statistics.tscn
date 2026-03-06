@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://gah2g6nabyf4"]
+
+[ext_resource type="Script" uid="uid://dwc8m0l6he4uo" path="res://scenes/windwos/StatisticsWindow.gd" id="1_nsh46"]
+[ext_resource type="PackedScene" uid="uid://bv4mvou68l2sk" path="res://scenes/windwos/altshowcse.tscn" id="2_5eyo7"]
+
+[node name="Statistics" type="Window" unique_id=1932979201 node_paths=PackedStringArray("total", "alts", "unique", "best", "altshowcse_container")]
+oversampling_override = 1.0
+initial_position = 4
+size = Vector2i(536, 390)
+visible = false
+force_native = true
+script = ExtResource("1_nsh46")
+total = NodePath("MarginContainer/TabContainer/Stats/VBoxContainer/Total")
+alts = NodePath("MarginContainer/TabContainer/Stats/VBoxContainer/alts")
+unique = NodePath("MarginContainer/TabContainer/Stats/VBoxContainer/Unique")
+best = NodePath("MarginContainer/TabContainer/Stats/VBoxContainer/best")
+altshowcse = ExtResource("2_5eyo7")
+altshowcse_container = NodePath("MarginContainer/TabContainer/Leaderboard/ScrollContainer/Container")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=121481691]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.28358635, 0.30315065, 0.06554975, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=21771767]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer" unique_id=870918671]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+current_tab = 1
+
+[node name="Stats" type="Control" parent="MarginContainer/TabContainer" unique_id=1161969781]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Stats" unique_id=1730227224]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Total" type="Label" parent="MarginContainer/TabContainer/Stats/VBoxContainer" unique_id=1786141427]
+layout_mode = 2
+text = "Total punishments:"
+
+[node name="alts" type="Label" parent="MarginContainer/TabContainer/Stats/VBoxContainer" unique_id=874615516]
+layout_mode = 2
+text = "thereof alts:"
+
+[node name="Unique" type="Label" parent="MarginContainer/TabContainer/Stats/VBoxContainer" unique_id=44141892]
+layout_mode = 2
+text = "unique entires:"
+
+[node name="best" type="Label" parent="MarginContainer/TabContainer/Stats/VBoxContainer" unique_id=1010711371]
+layout_mode = 2
+text = "Best evader(most alts):"
+
+[node name="Leaderboard" type="Control" parent="MarginContainer/TabContainer" unique_id=166474110]
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/TabContainer/Leaderboard" unique_id=1207491017]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="VBoxContainer" parent="MarginContainer/TabContainer/Leaderboard/ScrollContainer" unique_id=1822273302]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 2
