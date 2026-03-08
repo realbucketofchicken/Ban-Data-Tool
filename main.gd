@@ -152,8 +152,9 @@ func add_punishments(file:String):
 func clear_children():
 	save_label.hide()
 	for child in PunishContainer.get_children():
+		print("kill ",child)
 		child.queue_free()
-	update_ban_counter()
+	update_ban_counter.call_deferred()
 
 func edit_called(on:PunishShowcase,set_time:bool = false):
 	save_label.show()
@@ -166,10 +167,12 @@ func edit_called(on:PunishShowcase,set_time:bool = false):
 	update_ban_counter()
 
 func set_file(path:String):
+	clear_children()
+	print("buh")
 	current_path = path
 	file_label.text = path
-	clear_children()
 	add_punishments(path)
+	update_ban_counter.call_deferred()
 
 func close_request():
 	if !unsaved:
