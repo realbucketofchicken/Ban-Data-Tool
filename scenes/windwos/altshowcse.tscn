@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bv4mvou68l2sk"]
 
-[ext_resource type="Script" uid="uid://2f384phq5272" path="res://AltShowcase.gd" id="1_7tuyd"]
+[ext_resource type="Script" uid="uid://2f384phq5272" path="res://Scripts/Gdscript/AltShowcase.gd" id="1_7tuyd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7tuyd"]
 font_size = 20
@@ -10,7 +10,7 @@ font_size = 15
 font_color = Color(0.74558026, 0.7455802, 0.7455802, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_y1bem"]
-font_size = 27
+font_size = 18
 
 [node name="Altshowcase" type="Control" unique_id=96967418 node_paths=PackedStringArray("name_label", "uid_label", "count_label", "search_alts_button")]
 custom_minimum_size = Vector2(0, 58.235)
@@ -54,7 +54,7 @@ label_settings = SubResource("LabelSettings_45q1g")
 
 [node name="Count" type="Label" parent="HBoxContainer" unique_id=899914138]
 layout_mode = 2
-text = "67 alts"
+text = "69420 alts"
 label_settings = SubResource("LabelSettings_y1bem")
 
 [node name="SearchAltsButton" type="Button" parent="HBoxContainer" unique_id=957758160]

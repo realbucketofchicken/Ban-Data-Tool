@@ -26,17 +26,34 @@ func _ready() -> void:
 	more_btn.pressed.connect(options_window.show)
 	edit_window.changed.connect(update_ban_counter) # use as update
 	
+	var save_file = save_file_parser.read()
 	quit_confirmation.canceled.connect(get_tree().quit)
 	quit_confirmation.confirmed.connect(save_and_exit)
 	get_tree().auto_accept_quit = false
 	get_tree().root.close_requested.connect(close_request)
-	set_file(save_file_parser.read())
+	set_file(save_file.get("FILE",""))
 	file_opener.file_selected.connect(set_file)
 	open_btn.pressed.connect(file_opener.show)
 	new_btn.pressed.connect(new_punishment)
 	save_btn.pressed.connect(save)
 	options_window.remove_dupes.connect(remove_dupes)
 	options_window.save_v_one.connect(savevone)
+	
+	options_window.repo_edit.text = save_file.get("REPO","")
+	options_window.email_edit.text = save_file.get("EMAIL","")
+	options_window.name_edit.text = save_file.get("NAME","")
+	options_window.key_edit.text = save_file.get("KEY","")
+	options_window.use_old.button_pressed = save_file.get("USE_OLD",false)
+	
+	options_window.repo_edit.text_changed.connect(unsave.unbind(1))
+	options_window.email_edit.text_changed.connect(unsave.unbind(1))
+	options_window.name_edit.text_changed.connect(unsave.unbind(1))
+	options_window.key_edit.text_changed.connect(unsave.unbind(1))
+	options_window.use_old.pressed.connect(unsave)
+
+func unsave():
+	save_label.show()
+	unsaved = true
 
 func savevone():
 	var Punishments:Array[Punishment]
@@ -124,7 +141,10 @@ func save():
 			Punishments.append(child.punishment)
 	update_ban_counter()
 	save_file_parser.save(current_path)
-	exporter.Export(Punishments,current_path)
+	if options_window.use_old.button_pressed:
+		exporter.Exportv1(Punishments,current_path)
+	else:
+		exporter.Export(Punishments,current_path)
 	unsaved = false
 
 func new_punishment() -> void:

@@ -10,9 +10,13 @@ func parse(file:String) -> Array[Punishment]:
 	var raw:String = fileaccess.get_as_text()
 	var lines:PackedStringArray = raw.split("\n")
 	var punishments:Array[Punishment]
+	var formatting:bool = false
 	for line in lines:
-		print("line ",line)
 		var splits:PackedStringArray = line.split(": ")
+		if line.contains(":") and !line.contains(": "):
+			push_error("WARNING, INCORRECT FORMATTING")
+			formatting = true
+			splits = line.split(":")
 		match splits[0]:
 			"L!ListBegin":
 				print("start")
@@ -31,7 +35,8 @@ func parse(file:String) -> Array[Punishment]:
 				punishments[-1].punish_end = splits[1].to_int()
 			"L!ListEnd":
 				break
-	
+	if formatting:
+		OS.alert("This file contains incorret formatting, things might not load correctly!")
 	return punishments
 
 func punish_text_to_enum(text) -> Punishment.punishment_types:

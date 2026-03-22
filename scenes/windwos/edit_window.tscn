@@ -111,7 +111,9 @@ text = "Ends on:"
 [node name="DaysEdit" type="SpinBox" parent="margin/VBoxContainer/ScrollContainer/Container/Ends" unique_id=1346908939]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = 1.0
 max_value = 364.0
+value = 1.0
 prefix = "day "
 
 [node name="YearsEdit" type="SpinBox" parent="margin/VBoxContainer/ScrollContainer/Container/Ends" unique_id=467960707]

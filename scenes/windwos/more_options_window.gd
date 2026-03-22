@@ -1,7 +1,17 @@
 class_name MoreOptionsWindow extends Window
 
+@export var use_old: CheckBox
 @export var dupe_clear_button: Button
 @export var save_v_1_button: Button
+@export var repo_edit: LineEdit
+@export var email_edit: LineEdit
+@export var name_edit: LineEdit
+@export var key_edit: LineEdit
+@export var clone_repo_button: Button
+@export var clone_log: Label
+@export var reset_repo_button:Button
+
+
 
 signal remove_dupes
 signal save_v_one

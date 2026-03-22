@@ -1,17 +1,19 @@
 [gd_scene format=3 uid="uid://cxf3yenlgvupj"]
 
-[ext_resource type="Script" uid="uid://c57yqopmolu8o" path="res://main.gd" id="1_bjd11"]
+[ext_resource type="Script" uid="uid://c57yqopmolu8o" path="res://Scripts/Gdscript/main.gd" id="1_bjd11"]
 [ext_resource type="PackedScene" uid="uid://bxpr2nb1hydpi" path="res://scenes/punish_showcase.tscn" id="2_qmy6f"]
-[ext_resource type="Texture2D" uid="uid://o2sjogt3b0ht" path="res://tf2logo.png" id="3_mwfav"]
-[ext_resource type="Texture2D" uid="uid://dppihj7ptidog" path="res://Plus.png" id="4_3p2gp"]
-[ext_resource type="Texture2D" uid="uid://c7r26dxgqkklc" path="res://Minus.png" id="5_cvmbd"]
-[ext_resource type="Script" uid="uid://c5ihhdkosauvw" path="res://punish_list_parser.gd" id="6_ft6cd"]
-[ext_resource type="Script" uid="uid://caaljvxo8tja5" path="res://ban_list_exporter.gd" id="7_bb450"]
+[ext_resource type="Texture2D" uid="uid://o2sjogt3b0ht" path="res://Textures/tf2logo.png" id="3_mwfav"]
+[ext_resource type="Texture2D" uid="uid://dppihj7ptidog" path="res://Textures/Plus.png" id="4_3p2gp"]
+[ext_resource type="Texture2D" uid="uid://c7r26dxgqkklc" path="res://Textures/Minus.png" id="5_cvmbd"]
+[ext_resource type="Script" uid="uid://c5ihhdkosauvw" path="res://Scripts/Gdscript/punish_list_parser.gd" id="6_ft6cd"]
+[ext_resource type="Texture2D" uid="uid://decrh4ixlnkgd" path="res://Textures/Close.svg" id="6_mwfav"]
+[ext_resource type="Script" uid="uid://caaljvxo8tja5" path="res://Scripts/Gdscript/ban_list_exporter.gd" id="7_bb450"]
 [ext_resource type="PackedScene" uid="uid://dy18m2uq557to" path="res://scenes/windwos/edit_window.tscn" id="8_nfivy"]
 [ext_resource type="PackedScene" uid="uid://burukk5374yyu" path="res://scenes/windwos/MoreOptionsWindow.tscn" id="9_1nqs0"]
 [ext_resource type="PackedScene" uid="uid://gah2g6nabyf4" path="res://scenes/windwos/statistics.tscn" id="10_1iba3"]
-[ext_resource type="Script" uid="uid://bt5wd8qjaevk0" path="res://search.gd" id="11_yxlcp"]
-[ext_resource type="Script" uid="uid://3gmapu83dglo" path="res://save_file_parser.gd" id="12_ebg2g"]
+[ext_resource type="Script" uid="uid://bt5wd8qjaevk0" path="res://Scripts/Gdscript/search.gd" id="11_yxlcp"]
+[ext_resource type="Script" uid="uid://3gmapu83dglo" path="res://Scripts/Gdscript/save_file_parser.gd" id="12_ebg2g"]
+[ext_resource type="Script" uid="uid://dv74d87a31oyx" path="res://Scripts/Csharp/GitIntigration.cs" id="13_qmy6f"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lgr22"]
 font_size = 26
@@ -27,6 +29,18 @@ stacked_outline_1/size = 4
 stacked_outline_1/color = Color(0.8099345, 0.9946762, 7.70092e-07, 1)
 stacked_outline_2/size = 4
 stacked_outline_2/color = Color(0.32855865, 0.41260794, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mwfav"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.5446172, 0.24615589, 0.017454231, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
 
 [node name="Control" type="Control" unique_id=2276929 node_paths=PackedStringArray("edit_window", "punish_list_parser", "PunishContainer", "new_punish_btn", "file_opener", "open_btn", "new_btn", "save_btn", "exporter", "file_label", "save_file_parser", "quit_confirmation", "ban_counter", "save_label", "plus", "minus", "more_btn", "options_window")]
 layout_mode = 3
@@ -157,6 +171,28 @@ text = "More"
 layout_mode = 2
 placeholder_text = "Search..."
 
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=355358061]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3" unique_id=400647282]
+layout_mode = 2
+text = "Filter by:"
+
+[node name="NameCheck" type="CheckButton" parent="MarginContainer/VBoxContainer/HBoxContainer3" unique_id=422637912]
+layout_mode = 2
+button_pressed = true
+text = "Name"
+
+[node name="UIDCheck" type="CheckButton" parent="MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1437120434]
+layout_mode = 2
+button_pressed = true
+text = "UID"
+
+[node name="DescriptionCheck" type="CheckButton" parent="MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1216809809]
+layout_mode = 2
+button_pressed = true
+text = "Description"
+
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1970903622]
 layout_mode = 2
 
@@ -198,6 +234,64 @@ text = "*"
 layout_mode = 2
 text = "Save changes"
 
+[node name="Commit" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=533267664]
+layout_mode = 2
+tooltip_text = "Send your changes to github, make sure you have saved your changes before doing this!"
+text = "Commit changes"
+
+[node name="Pull" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=127094888]
+layout_mode = 2
+tooltip_text = "Use this when updating your local copy to the one on github. If you have local changes this wont override them"
+text = "Pull changes"
+
+[node name="Base" type="Control" parent="MarginContainer" unique_id=1265704529]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="Control" type="Control" parent="MarginContainer/Base" unique_id=419756343]
+anchors_preset = 0
+offset_left = -250.0
+offset_top = -163.0
+offset_bottom = -35.0
+
+[node name="ColorRect" type="Panel" parent="MarginContainer/Base/Control" unique_id=1808786583]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mwfav")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Base/Control" unique_id=1967441013]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Base/Control/VBoxContainer" unique_id=984310582]
+layout_mode = 2
+
+[node name="Warning" type="Label" parent="MarginContainer/Base/Control/VBoxContainer/HBoxContainer" unique_id=514469174]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Error:"
+
+[node name="Button" type="Button" parent="MarginContainer/Base/Control/VBoxContainer/HBoxContainer" unique_id=1955287259]
+layout_mode = 2
+icon = ExtResource("6_mwfav")
+flat = true
+
+[node name="Label" type="Label" parent="MarginContainer/Base/Control/VBoxContainer" unique_id=289973316]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 3
+autowrap_mode = 2
+
 [node name="BanListParser" type="Node" parent="." unique_id=951623750]
 script = ExtResource("6_ft6cd")
 
@@ -214,10 +308,13 @@ root = NodePath("..")
 PunishContainer = NodePath("../MarginContainer/VBoxContainer/ScrollContainer/Tree")
 search_bar = NodePath("../MarginContainer/VBoxContainer/SearchBar")
 
-[node name="Search" type="Node" parent="." unique_id=170590161 node_paths=PackedStringArray("search_bar", "punish_container")]
+[node name="Search" type="Node" parent="." unique_id=170590161 node_paths=PackedStringArray("search_bar", "punish_container", "name_check", "uid_check", "description_check")]
 script = ExtResource("11_yxlcp")
 search_bar = NodePath("../MarginContainer/VBoxContainer/SearchBar")
 punish_container = NodePath("../MarginContainer/VBoxContainer/ScrollContainer/Tree")
+name_check = NodePath("../MarginContainer/VBoxContainer/HBoxContainer3/NameCheck")
+uid_check = NodePath("../MarginContainer/VBoxContainer/HBoxContainer3/UIDCheck")
+description_check = NodePath("../MarginContainer/VBoxContainer/HBoxContainer3/DescriptionCheck")
 
 [node name="OpenFile" type="FileDialog" parent="." unique_id=1378168421]
 oversampling_override = 1.0
@@ -228,8 +325,9 @@ access = 2
 filters = PackedStringArray("*.txt", "*.dat")
 use_native_dialog = true
 
-[node name="SaveFileParser" type="Node" parent="." unique_id=930223611]
+[node name="SaveFileParser" type="Node" parent="." unique_id=930223611 node_paths=PackedStringArray("options_window")]
 script = ExtResource("12_ebg2g")
+options_window = NodePath("../OptionsWindow")
 
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="." unique_id=416398003]
 oversampling_override = 1.0
@@ -241,6 +339,16 @@ ok_button_text = "Save and quit"
 dialog_text = "You have unsaved changes!"
 cancel_button_text = "Quit without saving"
 
+[node name="Git" type="Node" parent="." unique_id=737987824 node_paths=PackedStringArray("commit_button", "options_window", "Main", "Push_error", "Push_Base", "pull_button")]
+script = ExtResource("13_qmy6f")
+commit_button = NodePath("../MarginContainer/VBoxContainer/HBoxContainer2/Commit")
+options_window = NodePath("../OptionsWindow")
+Main = NodePath("..")
+Push_error = NodePath("../MarginContainer/Base/Control/VBoxContainer/Label")
+Push_Base = NodePath("../MarginContainer/Base")
+pull_button = NodePath("../MarginContainer/VBoxContainer/HBoxContainer2/Pull")
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Stats" to="Statistics" method="grab_focus"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Stats" to="Statistics" method="show"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/More" to="OptionsWindow" method="grab_focus"]
+[connection signal="pressed" from="MarginContainer/Base/Control/VBoxContainer/HBoxContainer/Button" to="MarginContainer/Base" method="hide"]

@@ -5,16 +5,27 @@
 [sub_resource type="LabelSettings" id="LabelSettings_5xt3b"]
 font_size = 30
 
-[node name="OptionsWindow" type="Window" unique_id=1485451151 node_paths=PackedStringArray("dupe_clear_button", "save_v_1_button")]
+[sub_resource type="LabelSettings" id="LabelSettings_gec7h"]
+outline_color = Color(1, 0.7764706, 0.7764706, 1)
+
+[node name="OptionsWindow" type="Window" unique_id=1485451151 node_paths=PackedStringArray("use_old", "dupe_clear_button", "save_v_1_button", "repo_edit", "email_edit", "name_edit", "key_edit", "clone_repo_button", "clone_log", "reset_repo_button")]
 oversampling_override = 1.0
 position = Vector2i(0, 36)
-size = Vector2i(300, 200)
+size = Vector2i(557, 397)
 visible = false
 force_native = true
 min_size = Vector2i(262, 199)
 script = ExtResource("1_5xt3b")
+use_old = NodePath("MarginContainer/ScrollContainer/BoxContainer/UseOld")
 dupe_clear_button = NodePath("MarginContainer/ScrollContainer/BoxContainer/DupeClearButton")
 save_v_1_button = NodePath("MarginContainer/ScrollContainer/BoxContainer/SaveV1Button")
+repo_edit = NodePath("MarginContainer/ScrollContainer/BoxContainer/Repo/RepoEdit")
+email_edit = NodePath("MarginContainer/ScrollContainer/BoxContainer/Git Email/EmailEdit")
+name_edit = NodePath("MarginContainer/ScrollContainer/BoxContainer/Git Username/NameEdit")
+key_edit = NodePath("MarginContainer/ScrollContainer/BoxContainer/Git key/KeyEdit")
+clone_repo_button = NodePath("MarginContainer/ScrollContainer/BoxContainer/CloneRepo")
+clone_log = NodePath("MarginContainer/ScrollContainer/BoxContainer/CloneLog")
+reset_repo_button = NodePath("MarginContainer/ScrollContainer/BoxContainer/Reset Repo")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1724009282]
 anchors_preset = 15
@@ -50,6 +61,16 @@ layout_mode = 2
 size_flags_horizontal = 3
 vertical = true
 
+[node name="RichTextLabel3" type="Label" parent="MarginContainer/ScrollContainer/BoxContainer" unique_id=418846341]
+layout_mode = 2
+text = "General"
+label_settings = SubResource("LabelSettings_5xt3b")
+
+[node name="UseOld" type="CheckBox" parent="MarginContainer/ScrollContainer/BoxContainer" unique_id=1245550112]
+layout_mode = 2
+text = "Save file with OLD ban file structure(NEEDED before TFVR 4.0)"
+autowrap_mode = 2
+
 [node name="RichTextLabel" type="Label" parent="MarginContainer/ScrollContainer/BoxContainer" unique_id=66906023]
 layout_mode = 2
 text = "Utility"
@@ -64,3 +85,72 @@ text = "Clear Dupes"
 layout_mode = 2
 tooltip_text = "Save a version of the banlist in the legacy format"
 text = "save duplicate v1 file"
+
+[node name="RichTextLabel2" type="Label" parent="MarginContainer/ScrollContainer/BoxContainer" unique_id=824466576]
+layout_mode = 2
+text = "Git"
+label_settings = SubResource("LabelSettings_5xt3b")
+
+[node name="Repo" type="HBoxContainer" parent="MarginContainer/ScrollContainer/BoxContainer" unique_id=1177156648]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/BoxContainer/Repo" unique_id=1452601630]
+layout_mode = 2
+text = "GIT Repo:"
+
+[node name="RepoEdit" type="LineEdit" parent="MarginContainer/ScrollContainer/BoxContainer/Repo" unique_id=74818467]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Git Email" type="HBoxContainer" parent="MarginContainer/ScrollContainer/BoxContainer" unique_id=1897029584]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/BoxContainer/Git Email" unique_id=1643679626]
+layout_mode = 2
+text = "GIT Email:"
+
+[node name="EmailEdit" type="LineEdit" parent="MarginContainer/ScrollContainer/BoxContainer/Git Email" unique_id=1342026395]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Git Username" type="HBoxContainer" parent="MarginContainer/ScrollContainer/BoxContainer" unique_id=1185383015]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/BoxContainer/Git Username" unique_id=790257001]
+layout_mode = 2
+text = "GIT Name:"
+
+[node name="NameEdit" type="LineEdit" parent="MarginContainer/ScrollContainer/BoxContainer/Git Username" unique_id=791124761]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Git key" type="HBoxContainer" parent="MarginContainer/ScrollContainer/BoxContainer" unique_id=670946792]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/BoxContainer/Git key" unique_id=1561518298]
+layout_mode = 2
+text = "GIT Key:"
+
+[node name="KeyEdit" type="LineEdit" parent="MarginContainer/ScrollContainer/BoxContainer/Git key" unique_id=1089959886]
+layout_mode = 2
+size_flags_horizontal = 3
+secret = true
+
+[node name="CloneRepo" type="Button" parent="MarginContainer/ScrollContainer/BoxContainer" unique_id=1623040123]
+layout_mode = 2
+text = "Clone Repo"
+
+[node name="CloneLog" type="Label" parent="MarginContainer/ScrollContainer/BoxContainer" unique_id=876009711]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_gec7h")
+autowrap_mode = 2
+
+[node name="Reset Repo" type="Button" parent="MarginContainer/ScrollContainer/BoxContainer" unique_id=1348491757]
+layout_mode = 2
+text = "Reset Repo"
+
+[node name="ResetInfo" type="Label" parent="MarginContainer/ScrollContainer/BoxContainer" unique_id=1109421918]
+layout_mode = 2
+text = "Reset the repo if you have a weird issue that you cannot fix by other means, this will reset all your local changes"
+label_settings = SubResource("LabelSettings_gec7h")
+autowrap_mode = 2

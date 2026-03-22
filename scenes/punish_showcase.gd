@@ -16,8 +16,8 @@ func _ready() -> void:
 func update() -> void:
 	name_label.text = punishment.username
 	uid_label.text = punishment.uid
-	punishment_type_display.texture = load("res://door.png") if \
-							punishment.what_punishment == punishment.punishment_types.BAN else load("res://speaker.png")
+	punishment_type_display.texture = load("res://Textures/door.png") if \
+							punishment.what_punishment == punishment.punishment_types.BAN else load("res://Textures/speaker.png")
 
 func edit():
 	Edit.emit(self)
