@@ -5,7 +5,7 @@ using System;
 using System.IO;
 using System.Linq;
 
-public partial class GitIntigration:Node{
+public partial class GitIntegration:Node{
 	[Export] Button commit_button;
 	[Export] Window options_window;
 	[Export] Node Main;
