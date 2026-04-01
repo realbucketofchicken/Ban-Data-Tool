@@ -42,7 +42,7 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[node name="Control" type="Control" unique_id=2276929 node_paths=PackedStringArray("edit_window", "punish_list_parser", "PunishContainer", "new_punish_btn", "file_opener", "open_btn", "new_btn", "save_btn", "exporter", "file_label", "save_file_parser", "quit_confirmation", "ban_counter", "save_label", "plus", "minus", "more_btn", "options_window")]
+[node name="Control" type="Control" unique_id=2276929 node_paths=PackedStringArray("edit_window", "punish_list_parser", "PunishContainer", "new_punish_btn", "new_btn", "exporter", "save_file_parser", "quit_confirmation", "ban_counter", "plus", "minus", "more_btn", "options_window", "git", "commit", "save_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -55,20 +55,18 @@ punish_list_parser = NodePath("BanListParser")
 PunishContainer = NodePath("MarginContainer/VBoxContainer/ScrollContainer/Tree")
 punish_scene = ExtResource("2_qmy6f")
 new_punish_btn = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Punish")
-file_opener = NodePath("OpenFile")
-open_btn = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/OpenFileBtn")
 new_btn = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Punish")
-save_btn = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/SaveBtn")
 exporter = NodePath("BanListExporter")
-file_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/CurrentFile")
 save_file_parser = NodePath("SaveFileParser")
 quit_confirmation = NodePath("ConfirmationDialog")
 ban_counter = NodePath("MarginContainer/VBoxContainer/HBoxContainer/BanCounter")
-save_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/SaveLabel")
 plus = NodePath("MarginContainer/VBoxContainer/HBoxContainer/BanCounter/Plus")
 minus = NodePath("MarginContainer/VBoxContainer/HBoxContainer/BanCounter/Minus")
 more_btn = NodePath("MarginContainer/VBoxContainer/HBoxContainer/More")
 options_window = NodePath("OptionsWindow")
+git = NodePath("Git")
+commit = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Commit")
+save_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Label")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1516457942]
 modulate = Color(0.74558026, 0.7455802, 0.7455802, 1)
@@ -214,25 +212,10 @@ layout_mode = 2
 alignment = 2
 last_wrap_alignment = 2
 
-[node name="OpenFileBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1707347790]
-layout_mode = 2
-text = "Open file"
-
-[node name="CurrentFile" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1158273656]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "no file selected"
-clip_text = true
-text_overrun_behavior = 1
-
-[node name="SaveLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1042352785]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1462249568]
 visible = false
 layout_mode = 2
 text = "*"
-
-[node name="SaveBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1041770707]
-layout_mode = 2
-text = "Save changes"
 
 [node name="Commit" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=533267664]
 layout_mode = 2
@@ -315,15 +298,6 @@ punish_container = NodePath("../MarginContainer/VBoxContainer/ScrollContainer/Tr
 name_check = NodePath("../MarginContainer/VBoxContainer/HBoxContainer3/NameCheck")
 uid_check = NodePath("../MarginContainer/VBoxContainer/HBoxContainer3/UIDCheck")
 description_check = NodePath("../MarginContainer/VBoxContainer/HBoxContainer3/DescriptionCheck")
-
-[node name="OpenFile" type="FileDialog" parent="." unique_id=1378168421]
-oversampling_override = 1.0
-title = "Open a File"
-size = Vector2i(807, 360)
-file_mode = 0
-access = 2
-filters = PackedStringArray("*.txt", "*.dat")
-use_native_dialog = true
 
 [node name="SaveFileParser" type="Node" parent="." unique_id=930223611 node_paths=PackedStringArray("options_window")]
 script = ExtResource("12_ebg2g")

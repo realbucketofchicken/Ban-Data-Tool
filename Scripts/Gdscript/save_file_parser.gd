@@ -11,13 +11,12 @@ func read() -> Dictionary:
 	var Dict:Dictionary = file.get_var()
 	return Dict
 
-func save(current_file:String) -> void:
+func save() -> void:
 	var file = FileAccess.open(savloc,FileAccess.WRITE)
 	if !file:
 		push_error("cant write savefile")
 		return
 	var Dict:Dictionary[String,Variant] = {
-		"FILE":current_file,
 		"REPO":options_window.repo_edit.text,
 		"EMAIL":options_window.email_edit.text,
 		"NAME":options_window.name_edit.text,

@@ -15,7 +15,6 @@ public partial class GitIntegration:Node{
 	public override void _Ready()
 	{
 		base._Ready();
-		commit_button.Pressed += Commit_changes;
 		pull_button.Pressed += pull;
 		Button edit = (Button)options_window.Get("clone_repo_button");
 		if (edit != null){

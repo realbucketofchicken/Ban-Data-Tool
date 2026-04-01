@@ -82,6 +82,7 @@ tooltip_text = "Removes duplicate entires(same uid and name)"
 text = "Clear Dupes"
 
 [node name="SaveV1Button" type="Button" parent="MarginContainer/ScrollContainer/BoxContainer" unique_id=1718864258]
+visible = false
 layout_mode = 2
 tooltip_text = "Save a version of the banlist in the legacy format"
 text = "save duplicate v1 file"

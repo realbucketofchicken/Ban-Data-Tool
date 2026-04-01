@@ -4,25 +4,24 @@ class_name mainNode extends Control
 @export var PunishContainer:Control
 @export var punish_scene:PackedScene
 @export var new_punish_btn:Button
-@export var file_opener:FileDialog
-@export var open_btn:Button
 @export var new_btn:Button
-@export var save_btn:Button
 @export var exporter:BanListExporter
-@export var file_label:Label
 @export var save_file_parser:SaveFileParser
 @export var quit_confirmation:ConfirmationDialog
 @export var ban_counter: Label
-@export var save_label: Label
 @export var plus: CPUParticles2D
 @export var minus: CPUParticles2D
 @export var more_btn: Button
 @export var options_window: MoreOptionsWindow
+@export var git: Node
+@export var commit: Button
+@export var save_label:Label
 
 var current_path:String
 var unsaved:bool
 
 func _ready() -> void:
+	print(ProjectSettings.globalize_path("user://repo/"))
 	more_btn.pressed.connect(options_window.show)
 	edit_window.changed.connect(update_ban_counter) # use as update
 	
@@ -31,11 +30,8 @@ func _ready() -> void:
 	quit_confirmation.confirmed.connect(save_and_exit)
 	get_tree().auto_accept_quit = false
 	get_tree().root.close_requested.connect(close_request)
-	set_file(save_file.get("FILE",""))
-	file_opener.file_selected.connect(set_file)
-	open_btn.pressed.connect(file_opener.show)
 	new_btn.pressed.connect(new_punishment)
-	save_btn.pressed.connect(save)
+	commit.pressed.connect(save)
 	options_window.remove_dupes.connect(remove_dupes)
 	options_window.save_v_one.connect(savevone)
 	
@@ -50,9 +46,12 @@ func _ready() -> void:
 	options_window.name_edit.text_changed.connect(unsave.unbind(1))
 	options_window.key_edit.text_changed.connect(unsave.unbind(1))
 	options_window.use_old.pressed.connect(unsave)
+	if options_window.repo_edit.text:
+		if git.has_method("Clone"):
+			git.Clone()
 
 func unsave():
-	save_label.show()
+	save()
 	unsaved = true
 
 func savevone():
@@ -61,10 +60,6 @@ func savevone():
 		if child is PunishShowcase:
 			Punishments.append(child.punishment)
 	exporter.Exportv1(Punishments,current_path.rstrip(".txt")+" v1.txt")
-
-func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("save"):
-		save()
 
 var last_alts:int = 0
 func remove_dupes():
@@ -140,12 +135,13 @@ func save():
 		if child is PunishShowcase:
 			Punishments.append(child.punishment)
 	update_ban_counter()
-	save_file_parser.save(current_path)
+	save_file_parser.save()
 	if options_window.use_old.button_pressed:
 		exporter.Exportv1(Punishments,current_path)
 	else:
 		exporter.Export(Punishments,current_path)
 	unsaved = false
+	git.Commit_changes()
 
 func new_punishment() -> void:
 	unsaved = true
@@ -190,16 +186,17 @@ func set_file(path:String):
 	clear_children()
 	print("buh")
 	current_path = path
-	file_label.text = path
 	add_punishments(path)
 	update_ban_counter.call_deferred()
 
 func close_request():
 	if !unsaved:
+		git.delete_recursive("user://repo/")
 		get_tree().quit()
 	else:
 		quit_confirmation.show()
 
 func save_and_exit():
 	save()
+	git.Commit_changes()
 	get_tree().quit()
