@@ -7,4 +7,4 @@ class_name Punishment extends Resource
 ## in unix time, zero means forever
 @export var punish_end:int
 
-enum punishment_types{BAN,MUTE}
+enum punishment_types{BAN,MUTE,WARN}

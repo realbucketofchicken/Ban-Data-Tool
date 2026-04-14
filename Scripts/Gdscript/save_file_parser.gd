@@ -21,6 +21,5 @@ func save() -> void:
 		"EMAIL":options_window.email_edit.text,
 		"NAME":options_window.name_edit.text,
 		"KEY":options_window.key_edit.text,
-		"USE_OLD":options_window.use_old.button_pressed,
 	}
 	file.store_var(Dict)

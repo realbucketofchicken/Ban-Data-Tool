@@ -8,7 +8,7 @@ font_size = 30
 [sub_resource type="LabelSettings" id="LabelSettings_gec7h"]
 outline_color = Color(1, 0.7764706, 0.7764706, 1)
 
-[node name="OptionsWindow" type="Window" unique_id=1485451151 node_paths=PackedStringArray("use_old", "dupe_clear_button", "save_v_1_button", "repo_edit", "email_edit", "name_edit", "key_edit", "clone_repo_button", "clone_log", "reset_repo_button")]
+[node name="OptionsWindow" type="Window" unique_id=1485451151 node_paths=PackedStringArray("dupe_clear_button", "save_v_1_button", "repo_edit", "email_edit", "name_edit", "key_edit", "clone_repo_button", "clone_log", "reset_repo_button")]
 oversampling_override = 1.0
 position = Vector2i(0, 36)
 size = Vector2i(557, 397)
@@ -16,7 +16,6 @@ visible = false
 force_native = true
 min_size = Vector2i(262, 199)
 script = ExtResource("1_5xt3b")
-use_old = NodePath("MarginContainer/ScrollContainer/BoxContainer/UseOld")
 dupe_clear_button = NodePath("MarginContainer/ScrollContainer/BoxContainer/DupeClearButton")
 save_v_1_button = NodePath("MarginContainer/ScrollContainer/BoxContainer/SaveV1Button")
 repo_edit = NodePath("MarginContainer/ScrollContainer/BoxContainer/Repo/RepoEdit")
@@ -60,16 +59,6 @@ horizontal_scroll_mode = 0
 layout_mode = 2
 size_flags_horizontal = 3
 vertical = true
-
-[node name="RichTextLabel3" type="Label" parent="MarginContainer/ScrollContainer/BoxContainer" unique_id=418846341]
-layout_mode = 2
-text = "General"
-label_settings = SubResource("LabelSettings_5xt3b")
-
-[node name="UseOld" type="CheckBox" parent="MarginContainer/ScrollContainer/BoxContainer" unique_id=1245550112]
-layout_mode = 2
-text = "Save file with OLD ban file structure(NEEDED before TFVR 4.0)"
-autowrap_mode = 2
 
 [node name="RichTextLabel" type="Label" parent="MarginContainer/ScrollContainer/BoxContainer" unique_id=66906023]
 layout_mode = 2

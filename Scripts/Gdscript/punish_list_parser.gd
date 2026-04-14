@@ -46,4 +46,6 @@ func punish_text_to_enum(text) -> Punishment.punishment_types:
 			punish = Punishment.punishment_types.BAN
 		"MUTE":
 			punish = Punishment.punishment_types.MUTE
+		"WARN":
+			punish = Punishment.punishment_types.WARN
 	return punish

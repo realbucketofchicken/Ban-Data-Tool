@@ -39,13 +39,11 @@ func _ready() -> void:
 	options_window.email_edit.text = save_file.get("EMAIL","")
 	options_window.name_edit.text = save_file.get("NAME","")
 	options_window.key_edit.text = save_file.get("KEY","")
-	options_window.use_old.button_pressed = save_file.get("USE_OLD",false)
 	
 	options_window.repo_edit.text_changed.connect(unsave.unbind(1))
 	options_window.email_edit.text_changed.connect(unsave.unbind(1))
 	options_window.name_edit.text_changed.connect(unsave.unbind(1))
 	options_window.key_edit.text_changed.connect(unsave.unbind(1))
-	options_window.use_old.pressed.connect(unsave)
 	if options_window.repo_edit.text:
 		if git.has_method("Clone"):
 			git.Clone()
@@ -136,10 +134,7 @@ func save():
 			Punishments.append(child.punishment)
 	update_ban_counter()
 	save_file_parser.save()
-	if options_window.use_old.button_pressed:
-		exporter.Exportv1(Punishments,current_path)
-	else:
-		exporter.Export(Punishments,current_path)
+	exporter.Export(Punishments,current_path)
 	unsaved = false
 	git.Commit_changes()
 
