@@ -1,4 +1,4 @@
-# TFVR Ban List Editor
+# TFVR Ban Data Tool
 
 Requirements: 
 - [Godot 4.7 dev4](https://godotengine.org/download/archive/4.7-dev4/) .NET or higher
