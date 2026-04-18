@@ -108,14 +108,8 @@ func update_ban_counter():
 	var count:int = 0
 	var keys:Array[String]
 	for punishment in punishments:
-		if punishment.uid != "":
-			if !keys.has(punishment.uid):
-				keys.append(punishment.uid)
-				count += 1
-		else:
-			if !keys.has(punishment.username):
-				keys.append(punishment.username)
-				count += 1
+		if punishment.punish_reason != "BAN_EVADING":
+			count += 1
 	ban_counter.text = str(punishments.size()) + " Entires :::::: " + str(count) + \
 						" Unique :::::: " + str(punishments.size()-count) + " Alts"
 	var alts = punishments.size() - count
@@ -194,4 +188,6 @@ func close_request():
 func save_and_exit():
 	save()
 	git.Commit_changes()
+	git.delete_recursive("user://repo/")
+	await get_tree().process_frame
 	get_tree().quit()

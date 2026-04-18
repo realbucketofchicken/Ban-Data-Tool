@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bv4mvou68l2sk"]
 
-[ext_resource type="Script" uid="uid://2f384phq5272" path="res://Scripts/Gdscript/AltShowcase.gd" id="1_7tuyd"]
+[ext_resource type="Script" uid="uid://2f384phq5272" path="res://Scripts/Gdscript/Ban/AltShowcase.gd" id="1_7tuyd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7tuyd"]
 font_size = 20

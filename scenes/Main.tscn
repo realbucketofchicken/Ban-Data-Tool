@@ -1,19 +1,75 @@
 [gd_scene format=3 uid="uid://cxf3yenlgvupj"]
 
-[ext_resource type="Script" uid="uid://c57yqopmolu8o" path="res://Scripts/Gdscript/main.gd" id="1_bjd11"]
+[ext_resource type="Theme" uid="uid://qmw85rumbdxu" path="res://EditorTheme.tres" id="1_3p2gp"]
+[ext_resource type="Script" uid="uid://c57yqopmolu8o" path="res://Scripts/Gdscript/Ban/main.gd" id="1_bjd11"]
 [ext_resource type="PackedScene" uid="uid://bxpr2nb1hydpi" path="res://scenes/punish_showcase.tscn" id="2_qmy6f"]
 [ext_resource type="Texture2D" uid="uid://o2sjogt3b0ht" path="res://Textures/tf2logo.png" id="3_mwfav"]
 [ext_resource type="Texture2D" uid="uid://dppihj7ptidog" path="res://Textures/Plus.png" id="4_3p2gp"]
 [ext_resource type="Texture2D" uid="uid://c7r26dxgqkklc" path="res://Textures/Minus.png" id="5_cvmbd"]
-[ext_resource type="Script" uid="uid://c5ihhdkosauvw" path="res://Scripts/Gdscript/punish_list_parser.gd" id="6_ft6cd"]
+[ext_resource type="Script" uid="uid://c5ihhdkosauvw" path="res://Scripts/Gdscript/Ban/punish_list_parser.gd" id="6_ft6cd"]
 [ext_resource type="Texture2D" uid="uid://decrh4ixlnkgd" path="res://Textures/Close.svg" id="6_mwfav"]
-[ext_resource type="Script" uid="uid://caaljvxo8tja5" path="res://Scripts/Gdscript/ban_list_exporter.gd" id="7_bb450"]
+[ext_resource type="Script" uid="uid://caaljvxo8tja5" path="res://Scripts/Gdscript/Ban/ban_list_exporter.gd" id="7_bb450"]
 [ext_resource type="PackedScene" uid="uid://dy18m2uq557to" path="res://scenes/windwos/edit_window.tscn" id="8_nfivy"]
 [ext_resource type="PackedScene" uid="uid://burukk5374yyu" path="res://scenes/windwos/MoreOptionsWindow.tscn" id="9_1nqs0"]
 [ext_resource type="PackedScene" uid="uid://gah2g6nabyf4" path="res://scenes/windwos/statistics.tscn" id="10_1iba3"]
-[ext_resource type="Script" uid="uid://bt5wd8qjaevk0" path="res://Scripts/Gdscript/search.gd" id="11_yxlcp"]
-[ext_resource type="Script" uid="uid://3gmapu83dglo" path="res://Scripts/Gdscript/save_file_parser.gd" id="12_ebg2g"]
+[ext_resource type="Script" uid="uid://bt5wd8qjaevk0" path="res://Scripts/Gdscript/Ban/search.gd" id="11_yxlcp"]
+[ext_resource type="Script" uid="uid://3gmapu83dglo" path="res://Scripts/Gdscript/Ban/save_file_parser.gd" id="12_ebg2g"]
 [ext_resource type="Script" uid="uid://dv74d87a31oyx" path="res://Scripts/Csharp/GitIntegration.cs" id="13_qmy6f"]
+[ext_resource type="Script" uid="uid://byl0odlgqrjri" path="res://scenes/loadout_overrides.gd" id="14_bb450"]
+[ext_resource type="Script" uid="uid://cg2feh2v1snlb" path="res://Scripts/Gdscript/LoadoutOverrides/override_parser.gd" id="14_cvmbd"]
+[ext_resource type="Script" uid="uid://chmb3e61opk14" path="res://Scripts/Gdscript/UsersAndGroups/PeopleParser.gd" id="17_ft6cd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3p2gp"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.15294118, 0.15294118, 0.13725491, 0.32156864)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cvmbd"]
+bg_color = Color(0.1764706, 0.13725491, 0.06666667, 0.627451)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bb450"]
+content_margin_left = 10.0
+content_margin_top = 4.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+bg_color = Color(0.19076231, 0.19076234, 0.19076231, 0.6)
+border_width_top = 25
+border_color = Color(0.12225237, 0.1222522, 0.12225225, 1)
+border_blend = true
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nfivy"]
+content_margin_left = 10.0
+content_margin_top = 4.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+bg_color = Color(0.16078432, 0.16078432, 0.16078432, 1)
+border_width_top = 12
+border_color = Color(0.45452452, 0.45452416, 0.4545244, 1)
+border_blend = true
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ft6cd"]
+content_margin_left = 20.0
+content_margin_top = 4.0
+content_margin_right = 20.0
+content_margin_bottom = 4.0
+bg_color = Color(0.23921569, 0.23137255, 0.2784314, 1)
+border_width_top = 18
+border_color = Color(0.6392157, 0.69411767, 0.7607843, 1)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+shadow_color = Color(0.051970966, 0.05197096, 0.05197095, 0.6)
+shadow_size = 6
+shadow_offset = Vector2(0, -2.025)
 
 [sub_resource type="LabelSettings" id="LabelSettings_lgr22"]
 font_size = 26
@@ -49,39 +105,83 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_3p2gp")
 script = ExtResource("1_bjd11")
-edit_window = NodePath("EditWindow")
-punish_list_parser = NodePath("BanListParser")
-PunishContainer = NodePath("MarginContainer/VBoxContainer/ScrollContainer/Tree")
+edit_window = NodePath("Tabs/Banlist/EditWindow")
+punish_list_parser = NodePath("Tabs/Banlist/BanListParser")
+PunishContainer = NodePath("Tabs/Banlist/MarginContainer/VBoxContainer/ScrollContainer/Tree")
 punish_scene = ExtResource("2_qmy6f")
-new_punish_btn = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Punish")
-new_btn = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Punish")
-exporter = NodePath("BanListExporter")
+new_punish_btn = NodePath("Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer/Punish")
+new_btn = NodePath("Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer/Punish")
+exporter = NodePath("Tabs/Banlist/BanListExporter")
 save_file_parser = NodePath("SaveFileParser")
 quit_confirmation = NodePath("ConfirmationDialog")
-ban_counter = NodePath("MarginContainer/VBoxContainer/HBoxContainer/BanCounter")
-plus = NodePath("MarginContainer/VBoxContainer/HBoxContainer/BanCounter/Plus")
-minus = NodePath("MarginContainer/VBoxContainer/HBoxContainer/BanCounter/Minus")
-more_btn = NodePath("MarginContainer/VBoxContainer/HBoxContainer/More")
-options_window = NodePath("OptionsWindow")
+ban_counter = NodePath("Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer/BanCounter")
+plus = NodePath("Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer/BanCounter/Plus")
+minus = NodePath("Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer/BanCounter/Minus")
+more_btn = NodePath("Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer/More")
+options_window = NodePath("Tabs/Banlist/OptionsWindow")
 git = NodePath("Git")
-commit = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Commit")
-save_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Label")
+commit = NodePath("Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer2/Commit")
+save_label = NodePath("Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer2/Label")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1516457942]
+[node name="Tabs" type="TabContainer" parent="." unique_id=1219388433]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3p2gp")
+theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_cvmbd")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_bb450")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_nfivy")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_ft6cd")
+current_tab = 0
+
+[node name="Banlist" type="Control" parent="Tabs" unique_id=990971830]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="BanListParser" type="Node" parent="Tabs/Banlist" unique_id=951623750]
+script = ExtResource("6_ft6cd")
+
+[node name="BanListExporter" type="Node" parent="Tabs/Banlist" unique_id=1531169139]
+script = ExtResource("7_bb450")
+
+[node name="EditWindow" parent="Tabs/Banlist" unique_id=211137631 instance=ExtResource("8_nfivy")]
+
+[node name="OptionsWindow" parent="Tabs/Banlist" unique_id=1485451151 instance=ExtResource("9_1nqs0")]
+initial_position = 4
+
+[node name="Statistics" parent="Tabs/Banlist" unique_id=1932979201 node_paths=PackedStringArray("root", "PunishContainer", "search_bar") instance=ExtResource("10_1iba3")]
+root = NodePath("../../..")
+PunishContainer = NodePath("../MarginContainer/VBoxContainer/ScrollContainer/Tree")
+search_bar = NodePath("../MarginContainer/VBoxContainer/SearchBar")
+
+[node name="Search" type="Node" parent="Tabs/Banlist" unique_id=170590161 node_paths=PackedStringArray("search_bar", "punish_container", "name_check", "uid_check", "description_check")]
+script = ExtResource("11_yxlcp")
+search_bar = NodePath("../MarginContainer/VBoxContainer/SearchBar")
+punish_container = NodePath("../MarginContainer/VBoxContainer/ScrollContainer/Tree")
+name_check = NodePath("../MarginContainer/VBoxContainer/HBoxContainer3/NameCheck")
+uid_check = NodePath("../MarginContainer/VBoxContainer/HBoxContainer3/UIDCheck")
+description_check = NodePath("../MarginContainer/VBoxContainer/HBoxContainer3/DescriptionCheck")
+
+[node name="TextureRect" type="TextureRect" parent="Tabs/Banlist" unique_id=1516457942]
 modulate = Color(0.74558026, 0.7455802, 0.7455802, 1)
 z_index = -1
 layout_mode = 1
 anchors_preset = -1
 offset_left = -119.0
-offset_top = -214.0
+offset_top = -245.0
 offset_right = 405.0
-offset_bottom = 526.0
+offset_bottom = 495.0
+mouse_filter = 2
 texture = ExtResource("3_mwfav")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1789999219]
+[node name="ColorRect" type="ColorRect" parent="Tabs/Banlist" unique_id=1789999219]
 z_index = -2
 layout_mode = 1
 anchors_preset = 15
@@ -89,9 +189,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.32993424, 0.25434008, 0.17645565, 1)
+mouse_filter = 2
+color = Color(0.2834887, 0.26999918, 0.23374343, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1863119132]
+[node name="MarginContainer" type="MarginContainer" parent="Tabs/Banlist" unique_id=1863119132]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -103,25 +204,25 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1186401858]
+[node name="VBoxContainer" type="VBoxContainer" parent="Tabs/Banlist/MarginContainer" unique_id=1186401858]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="FlowContainer" parent="MarginContainer/VBoxContainer" unique_id=550324332]
+[node name="HBoxContainer" type="FlowContainer" parent="Tabs/Banlist/MarginContainer/VBoxContainer" unique_id=550324332]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=388690639]
+[node name="Label" type="Label" parent="Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer" unique_id=388690639]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "TFVR punishlist maker 2000™"
 label_settings = SubResource("LabelSettings_lgr22")
 
-[node name="BanCounter" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=589605427]
+[node name="BanCounter" type="Label" parent="Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer" unique_id=589605427]
 layout_mode = 2
 text = "Unique Bans: "
 
-[node name="Plus" type="CPUParticles2D" parent="MarginContainer/VBoxContainer/HBoxContainer/BanCounter" unique_id=93983186]
+[node name="Plus" type="CPUParticles2D" parent="Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer/BanCounter" unique_id=93983186]
 position = Vector2(76, 8)
 emitting = false
 texture = ExtResource("4_3p2gp")
@@ -134,7 +235,7 @@ spread = 180.0
 initial_velocity_min = 0.8
 initial_velocity_max = 74.87
 
-[node name="Minus" type="CPUParticles2D" parent="MarginContainer/VBoxContainer/HBoxContainer/BanCounter" unique_id=2092945034]
+[node name="Minus" type="CPUParticles2D" parent="Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer/BanCounter" unique_id=2092945034]
 position = Vector2(76, 8)
 emitting = false
 amount = 3
@@ -148,98 +249,100 @@ spread = 180.0
 initial_velocity_min = 0.8
 initial_velocity_max = 74.87
 
-[node name="ignore that up there" type="Node" parent="MarginContainer/VBoxContainer/HBoxContainer/BanCounter" unique_id=661846832]
+[node name="ignore that up there" type="Node" parent="Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer/BanCounter" unique_id=661846832]
 
-[node name="Punish" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=100050923]
+[node name="Punish" type="Button" parent="Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer" unique_id=100050923]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "new punishment"
 
-[node name="Stats" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1256562107]
+[node name="Stats" type="Button" parent="Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1256562107]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Stats"
 
-[node name="More" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=804757173]
+[node name="More" type="Button" parent="Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer" unique_id=804757173]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "More"
 
-[node name="SearchBar" type="LineEdit" parent="MarginContainer/VBoxContainer" unique_id=2022677611]
+[node name="SearchBar" type="LineEdit" parent="Tabs/Banlist/MarginContainer/VBoxContainer" unique_id=2022677611]
 layout_mode = 2
 placeholder_text = "Search..."
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=355358061]
+[node name="HBoxContainer3" type="HBoxContainer" parent="Tabs/Banlist/MarginContainer/VBoxContainer" unique_id=355358061]
+custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3" unique_id=400647282]
+[node name="Label" type="Label" parent="Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=400647282]
 layout_mode = 2
 text = "Filter by:"
 
-[node name="NameCheck" type="CheckButton" parent="MarginContainer/VBoxContainer/HBoxContainer3" unique_id=422637912]
+[node name="NameCheck" type="CheckButton" parent="Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=422637912]
 layout_mode = 2
 button_pressed = true
 text = "Name"
 
-[node name="UIDCheck" type="CheckButton" parent="MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1437120434]
+[node name="UIDCheck" type="CheckButton" parent="Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1437120434]
 layout_mode = 2
 button_pressed = true
 text = "UID"
 
-[node name="DescriptionCheck" type="CheckButton" parent="MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1216809809]
+[node name="DescriptionCheck" type="CheckButton" parent="Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1216809809]
 layout_mode = 2
 button_pressed = true
 text = "Description"
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1970903622]
+[node name="HSeparator" type="HSeparator" parent="Tabs/Banlist/MarginContainer/VBoxContainer" unique_id=1970903622]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer" unique_id=1423908622]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Tree" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer" unique_id=200799914]
+[node name="ScrollContainer" type="ScrollContainer" parent="Tabs/Banlist/MarginContainer/VBoxContainer" unique_id=1423908622]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1677426181]
+[node name="Tree" type="VBoxContainer" parent="Tabs/Banlist/MarginContainer/VBoxContainer/ScrollContainer" unique_id=200799914]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HSeparator2" type="HSeparator" parent="Tabs/Banlist/MarginContainer/VBoxContainer" unique_id=1677426181]
 layout_mode = 2
 
-[node name="HBoxContainer2" type="FlowContainer" parent="MarginContainer/VBoxContainer" unique_id=1760266968]
+[node name="HBoxContainer2" type="FlowContainer" parent="Tabs/Banlist/MarginContainer/VBoxContainer" unique_id=1760266968]
 layout_mode = 2
 alignment = 2
 last_wrap_alignment = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1462249568]
+[node name="Label" type="Label" parent="Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1462249568]
 visible = false
 layout_mode = 2
 text = "*"
 
-[node name="Commit" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=533267664]
+[node name="Commit" type="Button" parent="Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=533267664]
 layout_mode = 2
 tooltip_text = "Send your changes to github, make sure you have saved your changes before doing this!"
 text = "Commit changes"
 
-[node name="Pull" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=127094888]
+[node name="Pull" type="Button" parent="Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=127094888]
 layout_mode = 2
 tooltip_text = "Use this when updating your local copy to the one on github. If you have local changes this wont override them"
 text = "Pull changes"
 
-[node name="Base" type="Control" parent="MarginContainer" unique_id=1265704529]
+[node name="Base" type="Control" parent="Tabs/Banlist/MarginContainer" unique_id=1265704529]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="Control" type="Control" parent="MarginContainer/Base" unique_id=419756343]
+[node name="Control" type="Control" parent="Tabs/Banlist/MarginContainer/Base" unique_id=419756343]
 anchors_preset = 0
 offset_left = -250.0
 offset_top = -163.0
 offset_bottom = -35.0
 
-[node name="ColorRect" type="Panel" parent="MarginContainer/Base/Control" unique_id=1808786583]
+[node name="ColorRect" type="Panel" parent="Tabs/Banlist/MarginContainer/Base/Control" unique_id=1808786583]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -248,7 +351,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_mwfav")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Base/Control" unique_id=1967441013]
+[node name="VBoxContainer" type="VBoxContainer" parent="Tabs/Banlist/MarginContainer/Base/Control" unique_id=1967441013]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -256,52 +359,50 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Base/Control/VBoxContainer" unique_id=984310582]
+[node name="HBoxContainer" type="HBoxContainer" parent="Tabs/Banlist/MarginContainer/Base/Control/VBoxContainer" unique_id=984310582]
 layout_mode = 2
 
-[node name="Warning" type="Label" parent="MarginContainer/Base/Control/VBoxContainer/HBoxContainer" unique_id=514469174]
+[node name="Warning" type="Label" parent="Tabs/Banlist/MarginContainer/Base/Control/VBoxContainer/HBoxContainer" unique_id=514469174]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Error:"
 
-[node name="Button" type="Button" parent="MarginContainer/Base/Control/VBoxContainer/HBoxContainer" unique_id=1955287259]
+[node name="Button" type="Button" parent="Tabs/Banlist/MarginContainer/Base/Control/VBoxContainer/HBoxContainer" unique_id=1955287259]
 layout_mode = 2
 icon = ExtResource("6_mwfav")
 flat = true
 
-[node name="Label" type="Label" parent="MarginContainer/Base/Control/VBoxContainer" unique_id=289973316]
+[node name="Label" type="Label" parent="Tabs/Banlist/MarginContainer/Base/Control/VBoxContainer" unique_id=289973316]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_vertical = 3
 autowrap_mode = 2
 
-[node name="BanListParser" type="Node" parent="." unique_id=951623750]
-script = ExtResource("6_ft6cd")
+[node name="Loadout overrides" type="Control" parent="Tabs" unique_id=1214307614 node_paths=PackedStringArray("user_parser", "override_parser")]
+visible = false
+layout_mode = 2
+script = ExtResource("14_bb450")
+user_parser = NodePath("../../UserParser")
+override_parser = NodePath("OverrideParser")
+metadata/_tab_index = 1
 
-[node name="BanListExporter" type="Node" parent="." unique_id=1531169139]
-script = ExtResource("7_bb450")
+[node name="ColorRect" type="ColorRect" parent="Tabs/Loadout overrides" unique_id=1845085689]
+z_index = -2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.2958, 0.32674, 0.34, 1)
 
-[node name="EditWindow" parent="." unique_id=211137631 instance=ExtResource("8_nfivy")]
-
-[node name="OptionsWindow" parent="." unique_id=1485451151 instance=ExtResource("9_1nqs0")]
-initial_position = 4
-
-[node name="Statistics" parent="." unique_id=1932979201 node_paths=PackedStringArray("root", "PunishContainer", "search_bar") instance=ExtResource("10_1iba3")]
-root = NodePath("..")
-PunishContainer = NodePath("../MarginContainer/VBoxContainer/ScrollContainer/Tree")
-search_bar = NodePath("../MarginContainer/VBoxContainer/SearchBar")
-
-[node name="Search" type="Node" parent="." unique_id=170590161 node_paths=PackedStringArray("search_bar", "punish_container", "name_check", "uid_check", "description_check")]
-script = ExtResource("11_yxlcp")
-search_bar = NodePath("../MarginContainer/VBoxContainer/SearchBar")
-punish_container = NodePath("../MarginContainer/VBoxContainer/ScrollContainer/Tree")
-name_check = NodePath("../MarginContainer/VBoxContainer/HBoxContainer3/NameCheck")
-uid_check = NodePath("../MarginContainer/VBoxContainer/HBoxContainer3/UIDCheck")
-description_check = NodePath("../MarginContainer/VBoxContainer/HBoxContainer3/DescriptionCheck")
+[node name="OverrideParser" type="Node" parent="Tabs/Loadout overrides" unique_id=48398298]
+script = ExtResource("14_cvmbd")
 
 [node name="SaveFileParser" type="Node" parent="." unique_id=930223611 node_paths=PackedStringArray("options_window")]
 script = ExtResource("12_ebg2g")
-options_window = NodePath("../OptionsWindow")
+options_window = NodePath("../Tabs/Banlist/OptionsWindow")
 
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="." unique_id=416398003]
 oversampling_override = 1.0
@@ -315,14 +416,17 @@ cancel_button_text = "Quit without saving"
 
 [node name="Git" type="Node" parent="." unique_id=737987824 node_paths=PackedStringArray("commit_button", "options_window", "Main", "Push_error", "Push_Base", "pull_button")]
 script = ExtResource("13_qmy6f")
-commit_button = NodePath("../MarginContainer/VBoxContainer/HBoxContainer2/Commit")
-options_window = NodePath("../OptionsWindow")
+commit_button = NodePath("../Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer2/Commit")
+options_window = NodePath("../Tabs/Banlist/OptionsWindow")
 Main = NodePath("..")
-Push_error = NodePath("../MarginContainer/Base/Control/VBoxContainer/Label")
-Push_Base = NodePath("../MarginContainer/Base")
-pull_button = NodePath("../MarginContainer/VBoxContainer/HBoxContainer2/Pull")
+Push_error = NodePath("../Tabs/Banlist/MarginContainer/Base/Control/VBoxContainer/Label")
+Push_Base = NodePath("../Tabs/Banlist/MarginContainer/Base")
+pull_button = NodePath("../Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer2/Pull")
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Stats" to="Statistics" method="grab_focus"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Stats" to="Statistics" method="show"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/More" to="OptionsWindow" method="grab_focus"]
-[connection signal="pressed" from="MarginContainer/Base/Control/VBoxContainer/HBoxContainer/Button" to="MarginContainer/Base" method="hide"]
+[node name="UserParser" type="Node" parent="." unique_id=1676525800]
+script = ExtResource("17_ft6cd")
+
+[connection signal="pressed" from="Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer/Stats" to="Tabs/Banlist/Statistics" method="grab_focus"]
+[connection signal="pressed" from="Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer/Stats" to="Tabs/Banlist/Statistics" method="show"]
+[connection signal="pressed" from="Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer/More" to="Tabs/Banlist/OptionsWindow" method="grab_focus"]
+[connection signal="pressed" from="Tabs/Banlist/MarginContainer/Base/Control/VBoxContainer/HBoxContainer/Button" to="Tabs/Banlist/MarginContainer/Base" method="hide"]

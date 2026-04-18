@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bxpr2nb1hydpi"]
 
 [ext_resource type="Script" uid="uid://dxlkscqs0wpo6" path="res://scenes/punish_showcase.gd" id="1_3wpqj"]
-[ext_resource type="Script" uid="uid://cafyno407e2uq" path="res://Scripts/Gdscript/Punishment.gd" id="2_j4kex"]
+[ext_resource type="Script" uid="uid://cafyno407e2uq" path="res://Scripts/Gdscript/Ban/Punishment.gd" id="2_j4kex"]
 [ext_resource type="Texture2D" uid="uid://cinbmowbp2btd" path="res://Textures/door.png" id="3_lw8i6"]
 
 [sub_resource type="Resource" id="Resource_j4kex"]

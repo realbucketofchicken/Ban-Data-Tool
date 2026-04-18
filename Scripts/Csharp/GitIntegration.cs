@@ -30,14 +30,20 @@ public partial class GitIntegration:Node{
 		Godot.DirAccess current_access = Godot.DirAccess.Open(path);
 		current_access.IncludeHidden = true;
 		foreach (String Dir in current_access.GetDirectories()){
-			//GD.Print("found " + path.PathJoin(Dir));
+			GD.Print("found " + path.PathJoin(Dir));
 			delete_recursive(path.PathJoin(Dir));
 		}
 		foreach (String file in current_access.GetFiles()){
-			//GD.Print("found file " + file);
-			current_access.Remove(file);
+			GD.Print("found file " + file);
+			GD.Print("deleting status: ",current_access.Remove(file));
+			GD.Print(ProjectSettings.GlobalizePath(path+"/"+file));
+			if (current_access.FileExists(file)){
+				GD.Print("Deleting failed, moving to trash");
+				OS.MoveToTrash(ProjectSettings.GlobalizePath(path+"/"+file));
+			}
 		}
 		DirAccess.RemoveAbsolute(path);
+		GD.Print("deleted ",path);
 	}
 
 	public void Clone(){

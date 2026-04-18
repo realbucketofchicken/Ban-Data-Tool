@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://buxwqxbim0yul"]
+
+[ext_resource type="Script" uid="uid://7g560g423lea" path="res://scenes/Overrides/loadout_override_display.gd" id="1_fg8iq"]
+
+[node name="LoadoutOverrideDisplay" type="Control" unique_id=814608042 node_paths=PackedStringArray("class_option", "custom_class_edit", "class_custom", "slot_option", "slot_custom", "custom_slot_edit", "item_edit")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fg8iq")
+class_option = NodePath("VBoxContainer/Slot/SlotOption")
+custom_class_edit = NodePath("VBoxContainer/ClassCustom/CustomClassEdit")
+class_custom = NodePath("VBoxContainer/ClassCustom")
+slot_option = NodePath("VBoxContainer/Slot/SlotOption")
+slot_custom = NodePath("VBoxContainer/SlotCustom")
+custom_slot_edit = NodePath("VBoxContainer/SlotCustom/CustomSlotEdit")
+item_edit = NodePath("VBoxContainer/Item/ItemEdit")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=730386018]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.1254902)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=56912085]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Class" type="HBoxContainer" parent="VBoxContainer" unique_id=1528114493]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Class" unique_id=1084827761]
+layout_mode = 2
+text = "Class "
+
+[node name="ClassOption" type="OptionButton" parent="VBoxContainer/Class" unique_id=1722208042]
+layout_mode = 2
+selected = 0
+item_count = 10
+popup/item_0/text = "Scout"
+popup/item_0/id = 0
+popup/item_1/text = "Soldier"
+popup/item_1/id = 1
+popup/item_2/text = "Medic"
+popup/item_2/id = 2
+popup/item_3/text = "Engineer"
+popup/item_3/id = 3
+popup/item_4/text = "Heavy"
+popup/item_4/id = 4
+popup/item_5/text = "Sniper"
+popup/item_5/id = 5
+popup/item_6/text = "Spy"
+popup/item_6/id = 6
+popup/item_7/text = "Demoman"
+popup/item_7/id = 7
+popup/item_8/text = "Pyro"
+popup/item_8/id = 8
+popup/item_9/text = "custom"
+popup/item_9/id = 9
+
+[node name="ClassCustom" type="HBoxContainer" parent="VBoxContainer" unique_id=334297462]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/ClassCustom" unique_id=1982401228]
+layout_mode = 2
+text = "Custom Class "
+
+[node name="CustomClassEdit" type="LineEdit" parent="VBoxContainer/ClassCustom" unique_id=1107468060]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Slot" type="HBoxContainer" parent="VBoxContainer" unique_id=367787261]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Slot" unique_id=585404556]
+layout_mode = 2
+text = "Slot "
+
+[node name="SlotOption" type="OptionButton" parent="VBoxContainer/Slot" unique_id=1195768349]
+layout_mode = 2
+selected = 0
+item_count = 6
+popup/item_0/text = "Hat"
+popup/item_0/id = 0
+popup/item_1/text = "Misc"
+popup/item_1/id = 1
+popup/item_2/text = "Melee"
+popup/item_2/id = 2
+popup/item_3/text = "Primary"
+popup/item_3/id = 3
+popup/item_4/text = "Sidearm"
+popup/item_4/id = 4
+popup/item_5/text = "custom"
+popup/item_5/id = 5
+
+[node name="SlotCustom" type="HBoxContainer" parent="VBoxContainer" unique_id=1439779772]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/SlotCustom" unique_id=1723957459]
+layout_mode = 2
+text = "Custom Slot "
+
+[node name="CustomSlotEdit" type="LineEdit" parent="VBoxContainer/SlotCustom" unique_id=1153962219]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Item" type="HBoxContainer" parent="VBoxContainer" unique_id=759805961]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Item" unique_id=1095554842]
+layout_mode = 2
+text = "Custom Slot Item"
+
+[node name="ItemEdit" type="LineEdit" parent="VBoxContainer/Item" unique_id=895284990]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Players" type="HBoxContainer" parent="VBoxContainer" unique_id=1792459219]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Players" unique_id=120660372]
+layout_mode = 2
+text = "Players"
+
+[node name="ItemEdit" type="LineEdit" parent="VBoxContainer/Players" unique_id=607287913]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=433608728]
+layout_mode = 2

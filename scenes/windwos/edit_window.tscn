@@ -6,13 +6,16 @@
 font_size = 14
 font_color = Color(0.7581918, 0.7581918, 0.7581917, 1)
 
-[node name="EditWindow" type="Window" unique_id=1215629639]
+[node name="EditWindow" type="Window" unique_id=1215629639 node_paths=PackedStringArray("reason_edit", "reason_option", "reason_custom")]
 oversampling_override = 1.0
 initial_position = 4
 size = Vector2i(680, 395)
 visible = false
 force_native = true
 script = ExtResource("1_827p1")
+reason_edit = NodePath("margin/VBoxContainer/ScrollContainer/Container/ReasonCustom/Reason Edit")
+reason_option = NodePath("margin/VBoxContainer/ScrollContainer/Container/Reason/ReasonOption")
+reason_custom = NodePath("margin/VBoxContainer/ScrollContainer/Container/ReasonCustom")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=207830370]
 anchors_preset = 15
@@ -20,7 +23,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.32941177, 0.25490198, 0.1764706, 1)
+color = Color(0.28235295, 0.27058825, 0.23529412, 1)
 
 [node name="margin" type="MarginContainer" parent="." unique_id=81777967]
 anchors_preset = 15
@@ -97,7 +100,26 @@ layout_mode = 2
 layout_mode = 2
 text = "Reason:"
 
-[node name="Reason Edit" type="LineEdit" parent="margin/VBoxContainer/ScrollContainer/Container/Reason" unique_id=194738986]
+[node name="ReasonOption" type="OptionButton" parent="margin/VBoxContainer/ScrollContainer/Container/Reason" unique_id=1290708566]
+layout_mode = 2
+item_count = 4
+popup/item_0/text = "TOXICITY"
+popup/item_0/id = 0
+popup/item_1/text = "BAN_EVADING"
+popup/item_1/id = 1
+popup/item_2/text = "HARASSMENT"
+popup/item_2/id = 2
+popup/item_3/text = "custom"
+popup/item_3/id = 3
+
+[node name="ReasonCustom" type="HBoxContainer" parent="margin/VBoxContainer/ScrollContainer/Container" unique_id=2083898750]
+layout_mode = 2
+
+[node name="Reason Label" type="Label" parent="margin/VBoxContainer/ScrollContainer/Container/ReasonCustom" unique_id=2075988770]
+layout_mode = 2
+text = "Custom Reason:"
+
+[node name="Reason Edit" type="LineEdit" parent="margin/VBoxContainer/ScrollContainer/Container/ReasonCustom" unique_id=149222233]
 layout_mode = 2
 size_flags_horizontal = 3
 
