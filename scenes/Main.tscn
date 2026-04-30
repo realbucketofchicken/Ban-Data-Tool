@@ -226,7 +226,6 @@ func _ready() -> void:
 	text_changed.connect(hoho)
 
 func hoho(_txt:String):
-	print(\"hho \")
 	if text == \"\":
 		for child:Control in player_c_ontainer.get_children():
 			child.show()
@@ -267,6 +266,52 @@ func sort_ascending(a:PlayerInfo, b:PlayerInfo):
 	if a.times_played > b.times_played:
 		return true
 	return false
+"
+
+[sub_resource type="GDScript" id="GDScript_36rkl"]
+script/source = "extends VBoxContainer
+
+@export var name_display: PackedScene
+@export var server_stat_parser: ServerStatParser
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	server_stat_parser.just_parsed.connect(reparse)
+
+func reparse():
+	for child in get_children():
+		child.queue_free()
+	var root_display:NameDisplaye = name_display.instantiate()
+	root_display.label.text = \"Gamemode\"
+	root_display.label_2.text = \"Times Played\"
+	add_child(root_display)
+	var maps:Dictionary = {}
+	for key in server_stat_parser.gamemodes_month.keys():
+		if maps.has(server_stat_parser.gamemodes_month[key]):
+			if maps[server_stat_parser.gamemodes_month[key]] is Array:
+				#var new_arr
+				maps[server_stat_parser.gamemodes_month[key]].append(key)
+			else:
+				maps[server_stat_parser.gamemodes_month[key]] = [maps[server_stat_parser.gamemodes_month[key]],key]
+		else:
+			maps[server_stat_parser.gamemodes_month[key]] = key
+	maps.sort()
+	print(maps,\" gi\")
+	var keys = maps.keys()
+	keys.reverse()
+	for amount in keys:
+		var display:NameDisplaye = name_display.instantiate()
+		display.label_2.text = str(amount)
+		var gotten = maps[amount]
+		var new_string:String = \"\"
+		if gotten is Array:
+			for piece in gotten.size():
+				if gotten[piece]:
+					new_string += gotten[piece] + (\", \" if piece != gotten.size()-1 else \"\")
+		else:
+			new_string = gotten
+		display.label.text = str(new_string)
+		add_child(display)
 "
 
 [node name="Control" type="Control" unique_id=2276929 node_paths=PackedStringArray("edit_window", "punish_list_parser", "PunishContainer", "new_punish_btn", "new_btn", "exporter", "save_file_parser", "quit_confirmation", "ban_counter", "plus", "minus", "more_btn", "options_window", "git", "commit", "save_label")]
@@ -730,7 +775,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_1iba3")
 theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_yxlcp")
-current_tab = 1
+current_tab = 3
 
 [node name="Weapons" type="VBoxContainer" parent="Tabs/Server Statistics/VBoxContainer/TabContainer" unique_id=1628442051]
 visible = false
@@ -767,6 +812,7 @@ clip_text = true
 text_overrun_behavior = 1
 
 [node name="Players" type="ScrollContainer" parent="Tabs/Server Statistics/VBoxContainer/TabContainer" unique_id=1039046594]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -802,10 +848,17 @@ script = ExtResource("17_yxlcp")
 name_display = ExtResource("18_ebg2g")
 server_stat_parser = NodePath("../../../../ServerStatParser")
 
-[node name="Gamemodes" type="VBoxContainer" parent="Tabs/Server Statistics/VBoxContainer/TabContainer" unique_id=97195990]
-visible = false
+[node name="Gamemodes" type="ScrollContainer" parent="Tabs/Server Statistics/VBoxContainer/TabContainer" unique_id=1012624817]
 layout_mode = 2
 metadata/_tab_index = 3
+
+[node name="Gamemodes" type="VBoxContainer" parent="Tabs/Server Statistics/VBoxContainer/TabContainer/Gamemodes" unique_id=97195990 node_paths=PackedStringArray("server_stat_parser")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource("GDScript_36rkl")
+name_display = ExtResource("18_ebg2g")
+server_stat_parser = NodePath("../../../../ServerStatParser")
 
 [node name="ServerStatParser" type="Node" parent="Tabs/Server Statistics" unique_id=1363475987 node_paths=PackedStringArray("server_stat_getter")]
 script = ExtResource("17_1nqs0")

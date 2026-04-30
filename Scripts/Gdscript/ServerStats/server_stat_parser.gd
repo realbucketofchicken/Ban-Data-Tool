@@ -3,9 +3,13 @@ class_name ServerStatParser extends Node
 
 var parsed:bool
 var users_month:int
+var users_all_time:int
 var all_time_kills:int
+var month_kills:int
 var gamemodes_month:Dictionary
+var gamemodes:Dictionary
 var maps_month:Dictionary
+var maps:Dictionary
 var players_total:Array[PlayerInfo]
 signal just_parsed
 func _process(delta: float) -> void:
@@ -22,6 +26,16 @@ func _process(delta: float) -> void:
 						var current_time:float = Time.get_unix_time_from_system()
 						var diff:float = current_time - time
 						var this_month:bool = diff < 60*60*24*30
+						if server.has("gamemode"):
+							var previous:int = 0
+							if gamemodes.has(server["gamemode"]):
+								previous = gamemodes[server["gamemode"]]
+							gamemodes[server["gamemode"]] = previous + 1
+						if server.has("map"):
+							var previous:int = 0
+							if maps.has(server["map"]):
+								previous = maps[server["map"]]
+							maps[server["map"]] = previous + 1
 						if this_month:
 							if server.has("gamemode"):
 								var previous:int = 0
