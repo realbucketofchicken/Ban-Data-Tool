@@ -1,0 +1,6 @@
+1= blu, 2 = red 0 = 👩‍🦼H#@&[[]/
+
+Updating:
+	the server updates its data when starting and closing
+	otherwise It does at different times for different things, usually after death or after spawning
+	after 10 minutes its safe to assume a server dead

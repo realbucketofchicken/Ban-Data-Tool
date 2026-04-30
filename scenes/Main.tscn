@@ -17,7 +17,12 @@
 [ext_resource type="Script" uid="uid://dv74d87a31oyx" path="res://Scripts/Csharp/GitIntegration.cs" id="13_qmy6f"]
 [ext_resource type="Script" uid="uid://byl0odlgqrjri" path="res://scenes/loadout_overrides.gd" id="14_bb450"]
 [ext_resource type="Script" uid="uid://cg2feh2v1snlb" path="res://Scripts/Gdscript/LoadoutOverrides/override_parser.gd" id="14_cvmbd"]
+[ext_resource type="Script" uid="uid://d4kekhtba3d0u" path="res://scenes/ServerStatGetter.cs" id="16_nfivy"]
+[ext_resource type="Script" uid="uid://b05psfj22ka2f" path="res://Scripts/Gdscript/ServerStats/server_stat_parser.gd" id="17_1nqs0"]
+[ext_resource type="PackedScene" uid="uid://ct2d3yftjk212" path="res://scenes/stats/PlayerDisplay.tscn" id="17_ebg2g"]
 [ext_resource type="Script" uid="uid://chmb3e61opk14" path="res://Scripts/Gdscript/UsersAndGroups/PeopleParser.gd" id="17_ft6cd"]
+[ext_resource type="Script" uid="uid://badgostgh6rpx" path="res://scenes/stats/maps.gd" id="17_yxlcp"]
+[ext_resource type="PackedScene" uid="uid://b2e21u6c0mjxy" path="res://scenes/stats/NameDisplay.tscn" id="18_ebg2g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3p2gp"]
 content_margin_left = 0.0
@@ -98,6 +103,172 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1nqs0"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.19708219, 0.2543668, 0.21419287, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.65549743, 0.90003556, 0.5985833, 0.45882353)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="Theme" id="Theme_1iba3"]
+Panel/styles/panel = SubResource("StyleBoxFlat_1nqs0")
+
+[sub_resource type="LabelSettings" id="LabelSettings_1iba3"]
+font_size = 30
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.7176471)
+shadow_offset = Vector2(2.55, 2.675)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nfivy"]
+font_size = 28
+font_color = Color(0.89, 0.89, 0.89, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1nqs0"]
+font_size = 30
+
+[sub_resource type="GDScript" id="GDScript_1nqs0"]
+script/source = "extends Label
+
+@export var server_stat_parser: ServerStatParser
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	text = str(server_stat_parser.users_month)
+"
+
+[sub_resource type="GDScript" id="GDScript_1iba3"]
+script/source = "extends Label
+@export var server_stat_parser: ServerStatParser
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	server_stat_parser.just_parsed.connect(update)
+
+func update():
+	var maps:Dictionary = server_stat_parser.maps_month.duplicate()
+	var highest:int = -1
+	var current_map:String
+	for key in maps.keys():
+		if maps[key] > highest:
+			current_map = key
+			highest = maps[key]
+	text = current_map
+"
+
+[sub_resource type="GDScript" id="GDScript_yxlcp"]
+script/source = "extends Label
+@export var server_stat_parser: ServerStatParser
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	server_stat_parser.just_parsed.connect(update)
+
+func update():
+	var gamemodes:Dictionary = server_stat_parser.gamemodes_month.duplicate()
+	var highest:int = -1
+	var current_gamemode:String
+	for key in gamemodes.keys():
+		if gamemodes[key] > highest:
+			current_gamemode = key
+			highest = gamemodes[key]
+	text = current_gamemode
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1iba3"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.26416862, 0.30574214, 0.21699286, 0.5411765)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yxlcp"]
+bg_color = Color(0.1, 0.1, 0.1, 0.22745098)
+
+[sub_resource type="GDScript" id="GDScript_ebg2g"]
+script/source = "@tool
+extends HBoxContainer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	var children:Array = get_children()
+	for child:int in range(get_children().size()):
+		children[child].size.x = get_parent().size.x / get_children().size() 
+		children[child].position.x = (get_parent().size.x / get_children().size() ) * child
+"
+
+[sub_resource type="GDScript" id="GDScript_xa025"]
+script/source = "extends LineEdit
+
+@export var player_c_ontainer: VBoxContainer
+func _ready() -> void:
+	text_changed.connect(hoho)
+
+func hoho(_txt:String):
+	print(\"hho \")
+	if text == \"\":
+		for child:Control in player_c_ontainer.get_children():
+			child.show()
+	else:
+		for child:PlayerStatDisplay in player_c_ontainer.get_children():
+			child.hide()
+		for child:PlayerStatDisplay in player_c_ontainer.get_children():
+			if child.name_lbl.text.to_lower().contains(text.to_lower()):
+				child.show()
+			if child.uid.text.to_lower().contains(text.to_lower()):
+				child.show()
+"
+
+[sub_resource type="GDScript" id="GDScript_2ofn6"]
+script/source = "extends VBoxContainer
+
+@export var server_stat_parser: ServerStatParser
+@export var player_display: PackedScene
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	server_stat_parser.just_parsed.connect(parse)
+
+func parse():
+	var sorted_players:Array[PlayerInfo] = server_stat_parser.players_total.duplicate()
+	sorted_players.sort_custom(sort_ascending)
+	var root_display:PlayerStatDisplay = player_display.instantiate()
+	add_child(root_display)
+	for player:PlayerInfo in sorted_players:
+		var display:PlayerStatDisplay = player_display.instantiate()
+		add_child(display)
+		display.kd.text = str(roundf((float(player.total_kills) / float(player.total_deaths))*100)/100)
+		display.name_lbl.text = player.username
+		display.plays.text = str(player.times_played)
+		display.uid.text = player.uid
+
+func sort_ascending(a:PlayerInfo, b:PlayerInfo):
+	if a.times_played > b.times_played:
+		return true
+	return false
+"
+
 [node name="Control" type="Control" unique_id=2276929 node_paths=PackedStringArray("edit_window", "punish_list_parser", "PunishContainer", "new_punish_btn", "new_btn", "exporter", "save_file_parser", "quit_confirmation", "ban_counter", "plus", "minus", "more_btn", "options_window", "git", "commit", "save_label")]
 layout_mode = 3
 anchors_preset = 15
@@ -125,6 +296,20 @@ git = NodePath("Git")
 commit = NodePath("Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer2/Commit")
 save_label = NodePath("Tabs/Banlist/MarginContainer/VBoxContainer/HBoxContainer2/Label")
 
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1516457942]
+modulate = Color(0.74558026, 0.7455802, 0.7455802, 1)
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+offset_left = -119.0
+offset_top = -214.0
+offset_right = 405.0
+offset_bottom = 526.0
+mouse_filter = 2
+texture = ExtResource("3_mwfav")
+expand_mode = 5
+stretch_mode = 5
+
 [node name="Tabs" type="TabContainer" parent="." unique_id=1219388433]
 layout_mode = 1
 anchors_preset = 15
@@ -137,9 +322,10 @@ theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_cvmbd")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_bb450")
 theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_nfivy")
 theme_override_styles/tab_selected = SubResource("StyleBoxFlat_ft6cd")
-current_tab = 0
+current_tab = 2
 
 [node name="Banlist" type="Control" parent="Tabs" unique_id=990971830]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -166,20 +352,6 @@ punish_container = NodePath("../MarginContainer/VBoxContainer/ScrollContainer/Tr
 name_check = NodePath("../MarginContainer/VBoxContainer/HBoxContainer3/NameCheck")
 uid_check = NodePath("../MarginContainer/VBoxContainer/HBoxContainer3/UIDCheck")
 description_check = NodePath("../MarginContainer/VBoxContainer/HBoxContainer3/DescriptionCheck")
-
-[node name="TextureRect" type="TextureRect" parent="Tabs/Banlist" unique_id=1516457942]
-modulate = Color(0.74558026, 0.7455802, 0.7455802, 1)
-z_index = -1
-layout_mode = 1
-anchors_preset = -1
-offset_left = -119.0
-offset_top = -245.0
-offset_right = 405.0
-offset_bottom = 495.0
-mouse_filter = 2
-texture = ExtResource("3_mwfav")
-expand_mode = 5
-stretch_mode = 5
 
 [node name="ColorRect" type="ColorRect" parent="Tabs/Banlist" unique_id=1789999219]
 z_index = -2
@@ -399,6 +571,245 @@ color = Color(0.2958, 0.32674, 0.34, 1)
 
 [node name="OverrideParser" type="Node" parent="Tabs/Loadout overrides" unique_id=48398298]
 script = ExtResource("14_cvmbd")
+
+[node name="Server Statistics" type="Control" parent="Tabs" unique_id=1942261180]
+layout_mode = 2
+theme = SubResource("Theme_1iba3")
+metadata/_tab_index = 2
+
+[node name="ServerStatGetter" type="Node" parent="Tabs/Server Statistics" unique_id=1152887726]
+script = ExtResource("16_nfivy")
+
+[node name="ColorRect" type="ColorRect" parent="Tabs/Server Statistics" unique_id=1355809081]
+z_index = -2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+color = Color(0.1719254, 0.2944815, 0.30498523, 0.37254903)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tabs/Server Statistics" unique_id=257261483]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HeadlinerStats" type="VBoxContainer" parent="Tabs/Server Statistics/VBoxContainer" unique_id=1019416167]
+z_as_relative = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Tabs/Server Statistics/VBoxContainer/HeadlinerStats" unique_id=2078760808]
+layout_mode = 2
+text = "In the last 30 days..."
+label_settings = SubResource("LabelSettings_1iba3")
+
+[node name="TopBar" type="HBoxContainer" parent="Tabs/Server Statistics/VBoxContainer/HeadlinerStats" unique_id=1694414121]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+
+[node name="MonthlyPlayers" type="Panel" parent="Tabs/Server Statistics/VBoxContainer/HeadlinerStats/TopBar" unique_id=881796597]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tabs/Server Statistics/VBoxContainer/HeadlinerStats/TopBar/MonthlyPlayers" unique_id=1282225763]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Tabs/Server Statistics/VBoxContainer/HeadlinerStats/TopBar/MonthlyPlayers/VBoxContainer" unique_id=758988801]
+custom_maximum_size = Vector2(500, -1)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+text = "Players:"
+label_settings = SubResource("LabelSettings_nfivy")
+autowrap_mode = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="Label2" type="Label" parent="Tabs/Server Statistics/VBoxContainer/HeadlinerStats/TopBar/MonthlyPlayers/VBoxContainer" unique_id=1646811151 node_paths=PackedStringArray("server_stat_parser")]
+custom_maximum_size = Vector2(500, -1)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
+text = "353"
+label_settings = SubResource("LabelSettings_1nqs0")
+horizontal_alignment = 2
+vertical_alignment = 2
+autowrap_mode = 1
+clip_text = true
+text_overrun_behavior = 1
+script = SubResource("GDScript_1nqs0")
+server_stat_parser = NodePath("../../../../../../ServerStatParser")
+
+[node name="MonthlyMap" type="Panel" parent="Tabs/Server Statistics/VBoxContainer/HeadlinerStats/TopBar" unique_id=489519187]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tabs/Server Statistics/VBoxContainer/HeadlinerStats/TopBar/MonthlyMap" unique_id=267062023]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Tabs/Server Statistics/VBoxContainer/HeadlinerStats/TopBar/MonthlyMap/VBoxContainer" unique_id=1076988465]
+custom_minimum_size = Vector2(0, 38.415)
+custom_maximum_size = Vector2(500, -1)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+text = "Most Played Map:"
+label_settings = SubResource("LabelSettings_nfivy")
+autowrap_mode = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="Label2" type="Label" parent="Tabs/Server Statistics/VBoxContainer/HeadlinerStats/TopBar/MonthlyMap/VBoxContainer" unique_id=360141428 node_paths=PackedStringArray("server_stat_parser")]
+layout_mode = 2
+size_flags_vertical = 3
+text = "placeholder"
+label_settings = SubResource("LabelSettings_1nqs0")
+horizontal_alignment = 2
+vertical_alignment = 2
+autowrap_mode = 1
+clip_text = true
+text_overrun_behavior = 3
+script = SubResource("GDScript_1iba3")
+server_stat_parser = NodePath("../../../../../../ServerStatParser")
+
+[node name="PopGamemode" type="Panel" parent="Tabs/Server Statistics/VBoxContainer/HeadlinerStats/TopBar" unique_id=1033509599]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tabs/Server Statistics/VBoxContainer/HeadlinerStats/TopBar/PopGamemode" unique_id=142037385]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Tabs/Server Statistics/VBoxContainer/HeadlinerStats/TopBar/PopGamemode/VBoxContainer" unique_id=123988698]
+custom_maximum_size = Vector2(500, -1)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+text = "Most Popular Gamemode:"
+label_settings = SubResource("LabelSettings_nfivy")
+autowrap_mode = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="Label2" type="Label" parent="Tabs/Server Statistics/VBoxContainer/HeadlinerStats/TopBar/PopGamemode/VBoxContainer" unique_id=689478046 node_paths=PackedStringArray("server_stat_parser")]
+custom_maximum_size = Vector2(500, -1)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
+text = "koth of the hill"
+label_settings = SubResource("LabelSettings_1nqs0")
+horizontal_alignment = 2
+vertical_alignment = 2
+autowrap_mode = 1
+clip_text = true
+text_overrun_behavior = 1
+script = SubResource("GDScript_yxlcp")
+server_stat_parser = NodePath("../../../../../../ServerStatParser")
+
+[node name="TabContainer" type="TabContainer" parent="Tabs/Server Statistics/VBoxContainer" unique_id=578447304]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_1iba3")
+theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_yxlcp")
+current_tab = 1
+
+[node name="Weapons" type="VBoxContainer" parent="Tabs/Server Statistics/VBoxContainer/TabContainer" unique_id=1628442051]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Tabs/Server Statistics/VBoxContainer/TabContainer/Weapons" unique_id=2092838805]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+script = SubResource("GDScript_ebg2g")
+
+[node name="Label" type="Label" parent="Tabs/Server Statistics/VBoxContainer/TabContainer/Weapons/HBoxContainer" unique_id=1363333016]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+text = "Weapon name"
+horizontal_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="Label2" type="Label" parent="Tabs/Server Statistics/VBoxContainer/TabContainer/Weapons/HBoxContainer" unique_id=1324679732]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+text = "Average K/D"
+horizontal_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="Label3" type="Label" parent="Tabs/Server Statistics/VBoxContainer/TabContainer/Weapons/HBoxContainer" unique_id=920702989]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+text = "Total usage time"
+horizontal_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="Players" type="ScrollContainer" parent="Tabs/Server Statistics/VBoxContainer/TabContainer" unique_id=1039046594]
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Tabs/Server Statistics/VBoxContainer/TabContainer/Players" unique_id=1320520304]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LineEdit" type="LineEdit" parent="Tabs/Server Statistics/VBoxContainer/TabContainer/Players/VBoxContainer2" unique_id=652935929 node_paths=PackedStringArray("player_c_ontainer")]
+layout_mode = 2
+placeholder_text = "Search..."
+script = SubResource("GDScript_xa025")
+player_c_ontainer = NodePath("../PlayerCOntainer")
+
+[node name="PlayerCOntainer" type="VBoxContainer" parent="Tabs/Server Statistics/VBoxContainer/TabContainer/Players/VBoxContainer2" unique_id=1079726598 node_paths=PackedStringArray("server_stat_parser")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource("GDScript_2ofn6")
+server_stat_parser = NodePath("../../../../../ServerStatParser")
+player_display = ExtResource("17_ebg2g")
+
+[node name="Maps" type="ScrollContainer" parent="Tabs/Server Statistics/VBoxContainer/TabContainer" unique_id=915666381]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Maps" type="VBoxContainer" parent="Tabs/Server Statistics/VBoxContainer/TabContainer/Maps" unique_id=2010905860 node_paths=PackedStringArray("server_stat_parser")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("17_yxlcp")
+name_display = ExtResource("18_ebg2g")
+server_stat_parser = NodePath("../../../../ServerStatParser")
+
+[node name="Gamemodes" type="VBoxContainer" parent="Tabs/Server Statistics/VBoxContainer/TabContainer" unique_id=97195990]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="ServerStatParser" type="Node" parent="Tabs/Server Statistics" unique_id=1363475987 node_paths=PackedStringArray("server_stat_getter")]
+script = ExtResource("17_1nqs0")
+server_stat_getter = NodePath("../ServerStatGetter")
 
 [node name="SaveFileParser" type="Node" parent="." unique_id=930223611 node_paths=PackedStringArray("options_window")]
 script = ExtResource("12_ebg2g")

@@ -57,9 +57,12 @@ func update(set_time:bool = false):
 		"HARASSMENT":
 			reason_option.select(2)
 		_:
-			reason_custom.show()
-			reason_option.select(3)
-			reason_edit.text = punishment.punish_reason
+			if punishment.punish_reason:
+				reason_custom.show()
+				reason_option.select(3)
+				reason_edit.text = punishment.punish_reason
+			else:
+				reason_option.select(0)
 	var from_time:int = punishment.punish_end
 	var from_unix:Dictionary = Time.get_date_dict_from_unix_time(from_time)
 	@warning_ignore("integer_division")

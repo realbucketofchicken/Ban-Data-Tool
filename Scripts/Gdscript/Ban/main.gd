@@ -80,8 +80,6 @@ func remove_iteration() -> bool:
 			# cancel if not same name
 			if punishment_keep == punishment_two:
 				continue
-			if punishment_keep.punishment.username != punishment_two.punishment.username:
-				continue
 			# cancel if not same uid
 			if punishment_keep.punishment.uid != punishment_two.punishment.uid:
 				continue

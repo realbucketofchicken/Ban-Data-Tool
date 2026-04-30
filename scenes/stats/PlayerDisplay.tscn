@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://ct2d3yftjk212"]
+
+[ext_resource type="Script" uid="uid://biop38aeju75a" path="res://scenes/stats/player_display.gd" id="1_m3u0m"]
+
+[node name="PlayerDisplay" type="Control" unique_id=1208441133 node_paths=PackedStringArray("name_lbl", "uid", "plays", "kd")]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 0.046000004
+offset_bottom = 0.19199753
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m3u0m")
+name_lbl = NodePath("HBoxContainer/name")
+uid = NodePath("HBoxContainer/uid")
+plays = NodePath("HBoxContainer/plays")
+kd = NodePath("HBoxContainer/kd")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=504288121]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="name" type="Label" parent="HBoxContainer" unique_id=423224328]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Username"
+
+[node name="uid" type="Label" parent="HBoxContainer" unique_id=1540161212]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "UID"
+
+[node name="plays" type="Label" parent="HBoxContainer" unique_id=1169444218]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Plays"
+
+[node name="kd" type="Label" parent="HBoxContainer" unique_id=2027485224]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "average K/D"
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=1539410405]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+grow_horizontal = 2
+grow_vertical = 0

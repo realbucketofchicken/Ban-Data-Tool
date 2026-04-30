@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://b2e21u6c0mjxy"]
+
+[ext_resource type="Script" uid="uid://bc304ooheeb2g" path="res://scenes/stats/name_display.gd" id="1_mdapc"]
+
+[node name="NameDisplay" type="Control" unique_id=128991058 node_paths=PackedStringArray("label", "label_2")]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 0.051000003
+offset_top = -2.0
+offset_bottom = -0.048000336
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mdapc")
+label = NodePath("VBoxContainer/HBoxContainer/Label")
+label_2 = NodePath("VBoxContainer/HBoxContainer/Label2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1534297411]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1179614072]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=393776271]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "name"
+autowrap_mode = 1
+text_overrun_behavior = 3
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=1000028594]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "other thing"
+autowrap_mode = 1
+clip_text = true
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=1975662519]
+layout_mode = 2
