@@ -1,5 +1,4 @@
 class_name ServerStatParser extends Node
-@export var server_stat_getter: Node
 
 var parsed:bool
 var users_month:int
@@ -11,75 +10,30 @@ var gamemodes:Dictionary
 var maps_month:Dictionary
 var maps:Dictionary
 var players_total:Array[PlayerInfo]
-signal just_parsed
-func _process(delta: float) -> void:
-	if !parsed:
-		if server_stat_getter.get("resulting_txt") != null:
-			var result:String = server_stat_getter.get("resulting_txt")
-			if result:
-				var json:Dictionary = JSON.parse_string(result)
-				if json is Dictionary:
-					parsed = true
-					for server:Dictionary in json.values():
-						#print(server)
-						var time:float = Time.get_unix_time_from_datetime_string(server["created"])
-						var current_time:float = Time.get_unix_time_from_system()
-						var diff:float = current_time - time
-						var this_month:bool = diff < 60*60*24*30
-						if server.has("gamemode"):
-							var previous:int = 0
-							if gamemodes.has(server["gamemode"]):
-								previous = gamemodes[server["gamemode"]]
-							gamemodes[server["gamemode"]] = previous + 1
-						if server.has("map"):
-							var previous:int = 0
-							if maps.has(server["map"]):
-								previous = maps[server["map"]]
-							maps[server["map"]] = previous + 1
-						if this_month:
-							if server.has("gamemode"):
-								var previous:int = 0
-								if gamemodes_month.has(server["gamemode"]):
-									previous = gamemodes_month[server["gamemode"]]
-								gamemodes_month[server["gamemode"]] = previous + 1
-							if server.has("map"):
-								var previous:int = 0
-								if maps_month.has(server["map"]):
-									previous = maps_month[server["map"]]
-								maps_month[server["map"]] = previous + 1
-						for player in server["players"]:
-							var exists_yet:bool = false
-							for found_player in players_total:
-								if found_player.uid == player:
-									exists_yet = true
-									found_player.times_played += 1
-									found_player.total_kills += int(server["players"][player]["kills"])
-									var classes = server["players"][player]["classes"]
-									if classes is Dictionary:
-										print(classes)
-										for player_class:Dictionary in classes.values():
-											if player_class.has("stats"):
-												if player_class["stats"].has("deaths"):
-													found_player.total_deaths += int(player_class["stats"]["deaths"])
-									break
-							if !exists_yet:
-								if this_month:
-									users_month += 1
-								#print(player)
-								var new_player:PlayerInfo = PlayerInfo.new()
-								new_player.uid = player
-								new_player.username = str(server["players"][player]["username"])
-								new_player.times_played = 1
-								new_player.total_kills += int(server["players"][player]["kills"])
-								var classes = server["players"][player]["classes"]
-								if classes is Dictionary:
-									print(classes)
-									for player_class:Dictionary in classes.values():
-										if player_class.has("stats"):
-											if player_class["stats"].has("deaths"):
-												new_player.total_deaths += int(player_class["stats"]["deaths"])
-								players_total.append(new_player)
-							var dict:Dictionary = server["players"]
-							if dict.has("kills"):
-								all_time_kills += dict["kills"]
-					just_parsed.emit()
+signal player_parsed
+func _ready() -> void:
+	var player_request:HTTPRequest = HTTPRequest.new()
+	add_child(player_request)
+	player_request.request("https://tfvr-server.fly.dev/query?entity=item&group=name&metric=stats.kills&metric=stats.deaths&metric=stats.time&metric=_count")
+	player_request.request_completed.connect(parse_players)
+
+func parse_players(_result_num: int, _response_code: int, _headers: PackedStringArray, body: PackedByteArray):
+	print(body)
+	var json = JSON.parse_string(body.get_string_from_utf8())
+	if json is Dictionary:
+		for key in json:
+			for player_key in json[key]:
+				if !is_player_dupe(player_key):
+					var player:PlayerInfo = PlayerInfo.new()
+					player.uid = player_key
+					player.username = json[key][player_key]["meta"]["username"]
+					player.times_played = json[key][player_key]["metrics"]["_count"]
+					player.total_deaths = json[key][player_key]["metrics"]["stats.deaths"]
+					player.total_kills = json[key][player_key]["metrics"]["stats.kills"]
+	player_parsed.emit()
+
+func is_player_dupe(uid:String) -> bool:
+	for player in players_total:
+		if player.uid == uid:
+			return true
+	return false

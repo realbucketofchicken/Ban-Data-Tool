@@ -1,6 +1,8 @@
 class_name EditWindow extends Window
 @onready var days_edit: SpinBox = $margin/VBoxContainer/ScrollContainer/Container/Ends/DaysEdit
 @onready var years_edit: SpinBox = $margin/VBoxContainer/ScrollContainer/Container/Ends/YearsEdit
+@onready var month_edit: SpinBox = $margin/VBoxContainer/ScrollContainer/Container/Ends/MonthEdit
+
 @export var reason_edit: LineEdit
 @export var reason_option: OptionButton
 @onready var uid_edit: LineEdit = $"margin/VBoxContainer/ScrollContainer/Container/UID/UID Edit"
@@ -69,8 +71,10 @@ func update(set_time:bool = false):
 	var years:int = from_unix["year"]
 	@warning_ignore("integer_division")
 	var days:int = from_unix["day"]
+	var months:int = from_unix["month"]
 	years_edit.value = years
 	days_edit.value = days
+	month_edit.value = months
 	type_button.select(punishment.what_punishment)
 	changed.emit()
 
@@ -98,10 +102,19 @@ func get_punish() -> Punishment:
 	new_punishment.punish_reason = get_reason()
 	var time:int = 0
 	time += years_edit.value * 31536000 
-	time += days_edit.value *86400
-	var unixtime:float = Time.get_unix_time_from_datetime_dict({"year":years_edit.value,
-											"day":days_edit.value,})
+	time += days_edit.value * 86400
+	var unixtime:float = Time.get_unix_time_from_datetime_dict({
+			"year":years_edit.value,
+			"month":max(1,month_edit.value),
+			"day":days_edit.value})
+	print(years_edit.value)
+	print(max(1,int(days_edit.value)/30))
+	print(int(max(1,days_edit.value)) % 30)
+	print(unixtime)
+	if years_edit.value < 2000:
+		unixtime = 0
 	new_punishment.punish_end = unixtime
+	print(new_punishment.punish_end)
 	new_punishment.what_punishment = type_button.selected
 	changed.emit()
 	return new_punishment

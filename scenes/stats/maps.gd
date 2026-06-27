@@ -5,7 +5,7 @@ extends VBoxContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	server_stat_parser.just_parsed.connect(reparse)
+	pass #server_stat_parser.just_parsed.connect(reparse)
 
 func reparse():
 	for child in get_children():
