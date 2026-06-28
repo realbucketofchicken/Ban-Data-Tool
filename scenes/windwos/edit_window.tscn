@@ -11,6 +11,7 @@ oversampling_override = 1.0
 initial_position = 4
 size = Vector2i(680, 395)
 visible = false
+force_native = true
 script = ExtResource("1_827p1")
 reason_edit = NodePath("margin/VBoxContainer/ScrollContainer/Container/ReasonCustom/Reason Edit")
 reason_option = NodePath("margin/VBoxContainer/ScrollContainer/Container/Reason/ReasonOption")
