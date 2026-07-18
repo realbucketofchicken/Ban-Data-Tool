@@ -7,7 +7,8 @@ Requirements:
 This is a tool for managing ingame bans and loadout overrides(WIP) for the contractors VR "TFVR" mod
 
 ## How do i use this?
-> Note: This is designed for the [feathered unicorn](shttps://github.com/mfpousa/feathered-unicorns/tree/main) repo specifically
+> [!NOTE]
+> This is designed for the [feathered unicorn](shttps://github.com/mfpousa/feathered-unicorns/tree/main) repo specifically, and will probably not work for other uses without modification.
 
 Configuring this is straightforward,
 open a binary, go to the "more" button
